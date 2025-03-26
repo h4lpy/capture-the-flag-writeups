@@ -1,0 +1,158 @@
+{
+  "main": {
+    "id": "452c8238170b28ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "e84770a46d33a65d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e7712f80509f3b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "UNIX/sudo0x18_level1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1dffc3e51d32aa12",
+    "type": "split",
+    "children": [
+      {
+        "id": "65bef2b8f2c9a6a3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0e7ccc9ce079af34",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "daf8e9cc1e814a28",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "005637b9a63d07a6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "63db097fb21c08e7",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6f05cb4bf99f50f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "529b370c26ca1d43",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "UNIX/sudo0x18_level1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "fe5959ce0b89cd44",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "UNIX/sudo0x18_level1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "160586349e9e5170",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "65a514002c146eed",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "UNIX/sudo0x18_level1.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "1e7712f80509f3b2",
+  "lastOpenFiles": [
+    "README.md",
+    "UNIX/sudo0x18_level1.md",
+    "Windows",
+    "UNIX",
+    "sudo",
+    "Welcome.md"
+  ]
+}
