@@ -1,0 +1,3 @@
+Meerkat.Capital is an online investment company that specializes in cryptocurrency. They have recently experienced a breach whereby an employee was a victim of a browser in the middle attack. You need to work through the log files of the 3 affected computers to identify the flag.
+
+Hint: Problems you’ve already solved can come back. And sometimes they become so big that you need a team. This one might be a little harder. Head over to the Discord if you need help. 
