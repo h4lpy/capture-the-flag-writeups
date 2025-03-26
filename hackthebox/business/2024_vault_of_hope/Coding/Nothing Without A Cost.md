@@ -1,0 +1,5 @@
+# Nothing Without A Cost
+
+Difficulty: Hard
+
+After many perils and challenges, you have finally entered vault 79. Going through the remnants of a place people once dwelled by people, deep inside the vault you lay your eyes upon an unsealed bunker. You move it's entrance, and inside you lay your eyes on the long-sought gold. As you celebrate and rejoice, the door behind you closes, trapping you inside. A screen appears, telling you that you need to give big amounts of gold based on numbers in the screen, or you will be stuck inside forever. After solving so many problems however, and so close to success, you aren't prepared to give away the gold just to escape. You start studying what the screen says, and start to devise a way to keep as much gold as you can. Can you give away the least possible gold, and outsmart the vault?

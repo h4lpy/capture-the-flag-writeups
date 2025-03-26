@@ -1,0 +1,227 @@
+{
+  "main": {
+    "id": "a581b93cd76ebefb",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ee9d33eb0200729",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a4c3b2338eecadc4",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "461bfea233f64687",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "business/2024_vault_of_hope/Cloud/Protrude.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Protrude"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "de161f90e784b48d",
+    "type": "split",
+    "children": [
+      {
+        "id": "47d1648628704211",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dd6ac6be95eb073d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5421ed362ef2b881",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "fa572f5499c3a774",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "df6fcf54d35f0156",
+    "type": "split",
+    "children": [
+      {
+        "id": "105e1c31817d5fe9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e028e396dff2b1ef",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "business/2024_vault_of_hope/Cloud/Protrude.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Protrude"
+            }
+          },
+          {
+            "id": "35a0288a36334d76",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "business/2024_vault_of_hope/Cloud/Protrude.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Protrude"
+            }
+          },
+          {
+            "id": "d04dff34139cacfd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3974dd80ce7287b7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "business/2024_vault_of_hope/Cloud/Protrude.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Protrude"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "461bfea233f64687",
+  "lastOpenFiles": [
+    "business/2024_vault_of_hope/Cloud/Scurried.md",
+    "business/2024_vault_of_hope/Blockchain/BrokenSwap.md",
+    "business/2024_vault_of_hope/Blockchain/MetaVault.md",
+    "business/2024_vault_of_hope/Blockchain/NotADemocraticElection.md",
+    "business/2024_vault_of_hope/Blockchain/Recruitment.md",
+    "business/2024_vault_of_hope/Coding/Nothing Without A Cost.md",
+    "business/2024_vault_of_hope/Blockchain",
+    "business/2024_vault_of_hope/Coding/Branching Tactics.md",
+    "business/2024_vault_of_hope/Coding/Dynamic Paths.md",
+    "business/2024_vault_of_hope/Coding/Bag Secured.md",
+    "business/2024_vault_of_hope/Coding/Computational Recruiting.md",
+    "business/2024_vault_of_hope/Forensics/Mitigation.md",
+    "business/2024_vault_of_hope/Coding",
+    "business/2024_vault_of_hope/Forensics/Tangled Heist.md",
+    "business/2024_vault_of_hope/Forensics/Silicon Data Sleuthing.md",
+    "business/2024_vault_of_hope/Forensics/Counter Defensive.md",
+    "business/2024_vault_of_hope/Forensics/Caving.md",
+    "business/2024_vault_of_hope/Cloud/Ascenticism.md",
+    "business/2024_vault_of_hope/Cloud/CloudOfSmoke.md",
+    "business/2024_vault_of_hope/Cloud/Protrude.md",
+    "business/2024_vault_of_hope/Cloud/MetaRooted.md",
+    "business/2024_vault_of_hope/ICS/Knock Knock.md",
+    "business/2024_vault_of_hope/ICS/Sneak Peak.md",
+    "business/2024_vault_of_hope/ICS/Shush Protocol.md",
+    "business/2024_vault_of_hope/Fullpwn/Bulwark.md",
+    "business/2024_vault_of_hope/Fullpwn/Swarm.md",
+    "business/2024_vault_of_hope/Fullpwn/Survivor.md",
+    "business/2024_vault_of_hope/Fullpwn/Submerged.md",
+    "images/Pasted image 20240518154534.png",
+    "business/2024_vault_of_hope/Forensics",
+    "business/2024_vault_of_hope/Cloud",
+    "business/2024_vault_of_hope/ICS",
+    "business/2024_vault_of_hope/Fullpwn",
+    "business/2024_vault_of_hope/Pwn",
+    "business/2024_vault_of_hope/Reversing",
+    "business/2024_vault_of_hope/Misc",
+    "business/2024_vault_of_hope/Crypto",
+    "images/Pasted image 20240401184423.png",
+    "images/Pasted image 20240401184241.png",
+    "images/Pasted image 20240401184202.png",
+    "images/Pasted image 20240401183347.png",
+    "images/Pasted image 20240401183043.png"
+  ]
+}
