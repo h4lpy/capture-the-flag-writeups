@@ -61,27 +61,27 @@ Nmap done: 1 IP address (1 host up) scanned in 13.68 seconds
 
 Navigating to the website shows the Apache2 default homepage:
 
-![Year of the Rabbit - Default Apache](/images/yotr_default_apache.png)
+![Year of the Rabbit - Default Apache](tryhackme/images/yotr_default_apache.png)
 
 From a Gobuster scan, we see an `/assets` directory:
 
-![Year of the Rabbit - Assets](/images/yotr_assets.png)
+![Year of the Rabbit - Assets](tryhackme/images/yotr_assets.png)
 
 From `styles.css`, we see a hidden comment for `sup3r_s3cr3t_fl4g.php`:
 
-![Year of the Rabbit - Styles.css](/images/yotr_styles_css.png)
+![Year of the Rabbit - Styles.css](tryhackme/images/yotr_styles_css.png)
 
 Navigating to this site for the first time redirects us to the infamous Never Gonna Give You Up, with an alert on the site hinting that we should turn off JavaScript:
 
-![Year of the Rabbit - Sup3r S3cret Fl4g](/images/yotr_sup3r_s3cret_fl4g.png)
+![Year of the Rabbit - Sup3r S3cret Fl4g](tryhackme/images/yotr_sup3r_s3cret_fl4g.png)
 
 Instead of this, we can inspect the requests in BurpSuite which reveals hidden directory `/WExYY2Cv-qU`:
 
-![Year of the Rabbit - Hidden Directory](/images/yotr_hidden_directory.png)
+![Year of the Rabbit - Hidden Directory](tryhackme/images/yotr_hidden_directory.png)
 
 Inspecting this directory shows a single `Hot_Babe.png` image file:
 
-![Year of the Rabbit - Directory Contents](/images/yotr_directory_contents.png)
+![Year of the Rabbit - Directory Contents](tryhackme/images/yotr_directory_contents.png)
 
 Downloading the file and running `binwalk` identifies hidden data within the file, the `strings` output for which shows a list of credentials for the `ftpuser`:
 
@@ -90,7 +90,7 @@ $ binwalk -e Hot_Babe.png
 $ strings _
 ```
 
-![Year of the Rabbit - Dictionary](/images/yotr_dictionary.png)
+![Year of the Rabbit - Dictionary](tryhackme/images/yotr_dictionary.png)
 
 Using `hydra` now with our dictionary, we can obtain the `ftpuser` user's password:
 
@@ -98,27 +98,27 @@ Using `hydra` now with our dictionary, we can obtain the `ftpuser` user's passwo
 $ hydra -l ftpuser -P ftp_pass.txt ftp://<VICTIM_IP> -t 30
 ```
 
-![Year of the Rabbit - Hydra](/images/yotr_hydra.png)
+![Year of the Rabbit - Hydra](tryhackme/images/yotr_hydra.png)
 
 We can then successfully authenticate as `ftpuser`:
 
-![Year of the Rabbit - Login Success](/images/yotr_login_success.png)
+![Year of the Rabbit - Login Success](tryhackme/images/yotr_login_success.png)
 
 Listing the files in the directory, we see a `Eli's Creds.txt` file:
 
-![Year of the Rabbit - FTP Get](/images/yotr_ftp_get.png)
+![Year of the Rabbit - FTP Get](tryhackme/images/yotr_ftp_get.png)
 
 Viewing the contents, this file turns out to be encoded using [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck), an esoteric programming language:
 
-![Year of the Rabbit - Eli's Creds](/images/yotr_eli_creds.png)
+![Year of the Rabbit - Eli's Creds](tryhackme/images/yotr_eli_creds.png)
 
 Using [dcode-fr - brainfuck](https://www.dcode.fr/brainfuck-language), we can decode this :
 
-![Year of the Rabbit - Brainfuck](/images/yotr_brainfuck.png)
+![Year of the Rabbit - Brainfuck](tryhackme/images/yotr_brainfuck.png)
 
 Logging in via SSH:
 
-![Year of the Rabbit - SSH Login](/images/yotr_ssh_login.png)
+![Year of the Rabbit - SSH Login](tryhackme/images/yotr_ssh_login.png)
 
 Searching for this directory, we find it within `/usr/games/`:
 
@@ -126,19 +126,19 @@ Searching for this directory, we find it within `/usr/games/`:
 $ find / -name "s3cr3t" 2>/dev/null
 ```
 
-![Year of the Rabbit - /usr/games/secret](/images/yotr_usr_games_s3cr3t.png)
+![Year of the Rabbit - /usr/games/secret](tryhackme/images/yotr_usr_games_s3cr3t.png)
 
 The file `.th1s_m3ss4g3_15_f0r_gw3nd0l1n3_0nly!` shows their credentials:
 
-![Year of the Rabbit - Gwendoline Creds](/images/yotr_gwendoline_creds.png)
+![Year of the Rabbit - Gwendoline Creds](tryhackme/images/yotr_gwendoline_creds.png)
 
 Can now `su` to `gwendoline` and view the contents of `user.txt` within `/home/gwendoline`:
 
-![Year of the Rabbit - user.txt](/images/yotr_user_txt.png)
+![Year of the Rabbit - user.txt](tryhackme/images/yotr_user_txt.png)
 
 Running `sudo -l`, we see the following output:
 
-![Year of the Rabbit - sudo -l](/images/yotr_sudo_l.png)
+![Year of the Rabbit - sudo -l](tryhackme/images/yotr_sudo_l.png)
 
 This means we can run `/usr/bin/vi /home/gwendoline/user.txt` as any user other than `root`.
 
@@ -157,7 +157,7 @@ $ ./linpeas.sh
 
 From the results, we see an outdated version of `sudo`:
 
-![Year of the Rabbit - Linpeas Sudo Version](/images/yotr_linpeas_sudo.png)
+![Year of the Rabbit - Linpeas Sudo Version](tryhackme//images/yotr_linpeas_sudo.png)
 
 Searching for exploits, we see a local privilege escalation vulnerability dubbed CVE-2019-14287. With this version of `sudo`, no check is made for the existence of a specified user ID, so it executes a given binary with arbitrary user ID and `sudo privileges`. It uses the arguments `-u#-1` which returns `0`, the `root` user's ID:
 
@@ -170,7 +170,7 @@ $ sudo -u#-1 /usr/bin/vi /home/gwendoline/user.txt
 
 This will open the `vi` text editor which can be escaped by typing `:!/bin/sh` which will launch a shell as `root`:
 
-![Year of the Rabbit - Root flag](/images/yotr_root_flag.png)
+![Year of the Rabbit - Root flag](tryhackme/images/yotr_root_flag.png)
 
 -----
 

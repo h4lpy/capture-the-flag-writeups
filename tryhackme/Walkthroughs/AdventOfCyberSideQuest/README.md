@@ -10,11 +10,11 @@ This key is divided into four parts. Three will be posted on our social media ch
 
 The first part of the QR code was posted on the [TryHackMe discord](https://discord.com/channels/521382216299839518/1176552309707264041/1179095411420577943) at `2023-11-28 16:24:00 UTC`:
 
-![Advent of Cyber 2023 Side Quest 1 - QR 1](/images/aoc2023sq1_discord.png)
+![Advent of Cyber 2023 Side Quest 1 - QR 1](tryhackme/images/aoc2023sq1_discord.png)
 
 The second part comes from a [Tweet](https://twitter.com/RealTryHackMe/status/1730184898365767880) by `@RealTryHackMe` on `2023-11-30 11:19:00 UTC` containing link to `hubs.la/Q02btlld0`:
 
-![Advent of Cyber 2023 Side Quest 1 - Tweet](/images/aoc2023sq1_tweet.png)
+![Advent of Cyber 2023 Side Quest 1 - Tweet](tryhackme/images/aoc2023sq1_tweet.png)
 
 Redirects to [assets.tryhackme.com](https://assets.tryhackme.com/additional/aoc2023/2f7f8/0f93a.png):
 
@@ -40,13 +40,13 @@ https://assets.tryhackme.com/additional/aoc2023/2f7f8/0f93a.png
 
 Final QR code:
 
-![Advent of Cyber 2023 Side Quest 1 - Final QR Code](/images/aoc2023sq1_final_qr.png)
+![Advent of Cyber 2023 Side Quest 1 - Final QR Code](tryhackme/images/aoc2023sq1_final_qr.png)
 
 Scanning this QR code redirects us to an unreleased TryHackMe room - [The Return of the Yeti](https://tryhackme.com/jr/adv3nt0fdbopsjcap). For this room, we are supplied a PCAPNG file `VanSpy.pcapng`.
 
 Opening this in Wireshark shows this is a dump of Wifi traffic, with the SSID shown as `FreeWifiBFC`:
 
-![Advent of Cyber 2023 Side Quest 1 - SSID](/images/aoc2023sq1_ssid.png)
+![Advent of Cyber 2023 Side Quest 1 - SSID](tryhackme/images/aoc2023sq1_ssid.png)
 
 To obtain the password, we first need to convert the `pcapng` file to a format which Hashcat accepts. We can use `hcxpcapngtool` from [hcxtools](https://github.com/ZerBea/hcxtools):
 
@@ -63,9 +63,9 @@ $ hashcat -m 22000 VanSpy.hash /usr/share/wordlists/rockyou.txt
 $ hashcat -m 22000 VanSpy.hash /usr/share/wordlists/rockyou.txt --show
 ```
 
-![Advent of Cyber 2023 Side Quest 1 - Wifi Password](/images/aoc2023sq1_wifi_password.png)
+![Advent of Cyber 2023 Side Quest 1 - Wifi Password](tryhackme/images/aoc2023sq1_wifi_password.png)
 
-![Advent of Cyber 2023 Side Quest 1 - Aircrack-ng](/images/aoc2023sq1_aircrack.png)
+![Advent of Cyber 2023 Side Quest 1 - Aircrack-ng](tryhackme/images/aoc2023sq1_aircrack.png)
 
 ## Quest 2
 
@@ -79,15 +79,15 @@ Van Jolly still thinks the Ghost of Christmas Past is in the game. She says she 
 
 For the initial set up, we can set our name to `AAAAAAAAAAAAOOPS` after getting 16 coins from the PC.
 
-![Advent of Cyber 2023 Side Quest 2 - Setup](/images/aoc2023sq2_setup.png)
+![Advent of Cyber 2023 Side Quest 2 - Setup](tryhackme/images/aoc2023sq2_setup.png)
 
 Speaking to the shopkeeper, Van Holly, we see they have 12 items for sale, some of which are sold out:
 
-![Advent of Cyber 2023 Side Quest 2 - Shop Items](/images/aoc2023sq2_shop_items.png)
+![Advent of Cyber 2023 Side Quest 2 - Shop Items](tryhackme/images/aoc2023sq2_shop_items.png)
 
 We know that we can give ourselves these items using the buffer overflow technique showcased in the room, but looking more closely at the item IDs, we see that `a` is missing. Attempting to select `a` will generate this error:
 
-![Advent of Cyber 2023 Side Quest 2 - a error](/images/aoc2023sq2_a_error.png)
+![Advent of Cyber 2023 Side Quest 2 - a error](tryhackme/images/aoc2023sq2_a_error.png)
 
 Since we know we can control the content of our inventory, we can give ourselves the `a` item using the following payload:
 
@@ -95,11 +95,11 @@ Since we know we can control the content of our inventory, we can give ourselves
 AAAAAAAAAAAAOOPSAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
 ```
 
-![Advent of Cyber 2023 Side Quest 2 - a Item Overflow](/images/aoc2023sq2_a_item_overflow.png)
+![Advent of Cyber 2023 Side Quest 2 - a Item Overflow](tryhackme/images/aoc2023sq2_a_item_overflow.png)
 
 From the above, we now have a yeti token. However, when we interact with the shopkeeper, he states that this is a fake, but notes he can sell us the real one for a fee:
 
-![Adevent of Cyber 2023 Side Quest 2 - Fake Yeti Token](/images/aoc2023sq2_fake_yeti_token.png)
+![Adevent of Cyber 2023 Side Quest 2 - Fake Yeti Token](tryhackme/images/aoc2023sq2_fake_yeti_token.png)
 
 As we saw previously, we don't have enough coins to simply buy `a` from the store, so we have to give ourselves more coins. From the [ASCII table](https://www.asciitable.com/), the character which will give us the largest number of coins on a standard keyboard is `~`, so changing our initial setup payload to the following will give us the maximum number of coins and allow us to buy the real yeti token:
 
@@ -107,17 +107,17 @@ As we saw previously, we don't have enough coins to simply buy `a` from the stor
 AAAAAAAAAAAA~~~~
 ```
 
-![Advent of Cyber 2023 Side Quest 2 - Real Yeti Token](/images/aoc2023sq2_real_yeti_token.png)
+![Advent of Cyber 2023 Side Quest 2 - Real Yeti Token](tryhackme/images/aoc2023sq2_real_yeti_token.png)
 
 As shown in the above screenshot, the mysterious Ghost of Christmas Past appears at the house, stating a **cat named Snowball** will arrive here one day where he will be greeted by **Midas the merchant** and **Ted the name switcher** and that he will bring **31337 coins** and the **yeti token**. When these conditions are met, a secret code is inputted and the hidden code is revealed:
 
-![Advent of Cyber 2023 Side Quest 2 - GOCP Snowball](/images/aoc2023sq2_gocp_snowball.png)
+![Advent of Cyber 2023 Side Quest 2 - GOCP Snowball](tryhackme/images/aoc2023sq2_gocp_snowball.png)
 
-![Advent of Cyber 2023 Side Quest 2 - GOCP Midas and Ted](/images/aoc2023sq2_gocp_midas_ted.png)
+![Advent of Cyber 2023 Side Quest 2 - GOCP Midas and Ted](tryhackme/images/aoc2023sq2_gocp_midas_ted.png)
 
-![Advent of Cyber 2023 Side Quest 2 - GOCP Coin](/images/aoc2023sq2_gocp_coin.png)
+![Advent of Cyber 2023 Side Quest 2 - GOCP Coin](tryhackme/images/aoc2023sq2_gocp_coin.png)
 
-![Advent of Cyber 2023 Side Quest 2 - GOCP Secret Code](/images/aoc2023sq2_gocp_secret_code.png)
+![Advent of Cyber 2023 Side Quest 2 - GOCP Secret Code](tryhackme/images/aoc2023sq2_gocp_secret_code.png)
 
 
 
@@ -141,12 +141,12 @@ This key will be hidden in one of the challenges of the main Advent of Cyber eve
 Van Sprinkles left some stuff around the DC. It's like a secret message waiting to be unravelled!
 ```
 
-![Advent of Cyber 2023 Side Quest 3 - Suspicious Files](/images/aoc2023sq3_suspicious_files.png)
+![Advent of Cyber 2023 Side Quest 3 - Suspicious Files](tryhackme/images/aoc2023sq3_suspicious_files.png)
 
 
 Downloading the files:
 
-![Advent of Cyber 2023 Side Quest 3 - Download](/images/aoc2023sq3_download.png)
+![Advent of Cyber 2023 Side Quest 3 - Download](tryhackme/images/aoc2023sq3_download.png)
 
 ## Quest 4
 

@@ -77,11 +77,11 @@ Nmap done: 1 IP address (1 host up) scanned in 16.20 seconds
 ```
 
 
-![Blue - MSF Search](/images/blue_msf_search.png)
+![Blue - MSF Search](tryhackme/images/blue_msf_search.png)
 
-![Blue - RHOSTS](/images/blue_rhosts.png)
+![Blue - RHOSTS](tryhackme/images/blue_rhosts.png)
 
-![](blue_exploit.png)
+![](tryhackme/images/blue_exploit.png)
 
 -----
 

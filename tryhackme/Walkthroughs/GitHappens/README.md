@@ -55,11 +55,11 @@ Nmap done: 1 IP address (1 host up) scanned in 11.53 seconds
 
 Navigating to the website shows a login form:
 
-![GitHappens - LoginForm](/images/githappens_loginform.png)
+![GitHappens - LoginForm](tryhackme/images/githappens_loginform.png)
 
 From our Nmap scan, recall that there is a `/.git/` directory which holds the structure of a GitHub repository:
 
-![GitHappens - .git directory](/images/githappens_git_directory.png)
+![GitHappens - .git directory](tryhackme/images/githappens_git_directory.png)
 
 We can use [gitdumper.sh](https://raw.githubusercontent.com/internetwache/GitTools/master/Dumper/gitdumper.sh) from [GitTools](https://github.com/internetwache/GitTools) to dump the Git repository from the site:
 
@@ -69,7 +69,7 @@ $ chmod +x gitdumper.sh
 $ ./gitdumper.sh http://VICTIM_IP/.git/ .
 ```
 
-![GitHappens - gitdumper.sh](/images/githappens_gitdumper.png)
+![GitHappens - gitdumper.sh](tryhackme/images/githappens_gitdumper.png)
 
 We now have a `.git/` folder downloaded to our attacker machine. With this, we can run `git log` to show the commit logs. From the log, we can see a security change was made to obfuscate the code at commit `e56eaa8e29b589976f33d76bc58a0c4dfb9315b1`.
 
@@ -77,7 +77,7 @@ We now have a `.git/` folder downloaded to our attacker machine. With this, we c
 $ git log
 ```
 
-![GitHappens - Commit Log](/images/githappens_commitlog.png)
+![GitHappens - Commit Log](tryhackme/images/githappens_commitlog.png)
 
 As such, we can run `git checkout` to load the previous commit `395e087334d613d5e423cdf8f7be27196a360459` and view the deobfuscated code.
 
@@ -87,7 +87,7 @@ $ git checkout 395e087334d613d5e423cdf8f7be27196a360459
 
 We can view the `index.html` file to view the **Super Secret Password**:
 
-![GitHappens - Admin Credentials](/images/githappens_admin_credentials.png)
+![GitHappens - Admin Credentials](tryhackme/images/githappens_admin_credentials.png)
 
 -----
 

@@ -62,7 +62,7 @@ Nmap done: 1 IP address (1 host up) scanned in 22.08 seconds
 
 Navigating to the website, we see that it is running a simulated terminal:
 
-![Mr Robot - Webpage](/images/mrrobot_webpage.png)
+![Mr Robot - Webpage](tryhackme/images/mrrobot_webpage.png)
 
 While we manually crawl the website, we can run Gobuster which, when complete, indicates that the website is running Wordpress as its CMS (Content Management System):
 
@@ -70,7 +70,7 @@ While we manually crawl the website, we can run Gobuster which, when complete, i
 $ gobuster dir -u http://<VICTIM IP>/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-![Mr Robot - Gobuster](/images/mrrobot_gobuster.png)
+![Mr Robot - Gobuster](tryhackme/images/mrrobot_gobuster.png)
 
 As such, we can run `wpscan` against the site. From this we find a `robots.txt` file:
 
@@ -78,11 +78,11 @@ As such, we can run `wpscan` against the site. From this we find a `robots.txt` 
 $ wpscan --url http://<VICTIM IP>
 ```
 
-![Mr Robot - WPScan](/images/mrrobot_wpscan.png)
+![Mr Robot - WPScan](tryhackme/images/mrrobot_wpscan.png)
 
 Accessing `/robots.txt` shows two files are listed, namely `fsocity.dic` and `key-1-of-3.txt`:
 
-![Mr Robot - Robots.txt](/images/mrrobot_robotstxt.png)
+![Mr Robot - Robots.txt](tryhackme/images/mrrobot_robotstxt.png)
 
 Downloading the files:
 
@@ -99,7 +99,7 @@ Navigating to `/wp-login.php`, we see we have fairly verbose error messaging whe
 
 This means we can use this to infer the username as it will likely produce a different error message as it would be valid. Now we capture a request in BurpSuite in order to get the parameters required for the bruteforce.
 
-![Mr Robot - BurpSuite Request](/images/mrrobot_burpsuite_request.png)
+![Mr Robot - BurpSuite Request](tryhackme/images/mrrobot_burpsuite_request.png)
 
 In particular, `log=admin&pwd=admin&wp-submit=Log+In` are the parameters we need.
 
@@ -124,7 +124,7 @@ Now, we use `hydra` to bruteforce the login page for the username:
 $ hydra -L fsocity_filtered.dic -p test <VICTIM IP> http-post-form '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:Invalid username' -t 30
 ```
 
-![Mr Robot - Hydra Username](/images/mrrobot_hydra_username.png)
+![Mr Robot - Hydra Username](tryhackme/images/mrrobot_hydra_username.png)
 
 To summarise, the `hydra` command:
 
@@ -141,19 +141,19 @@ Now we have the username, `Elliot`, we can use the same technique to get the pas
 $ hydra -l Elliot -P fsocity_filtered.dic <VICTIM IP> http-post-form '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:The password you entered for the username' -t 30
 ```
 
-![Mr Robot - Hydra Password](/images/mrrobot_hydra_password.png)
+![Mr Robot - Hydra Password](tryhackme/images/mrrobot_hydra_password.png)
 
 With the credentials `Elliot:ER28-0652`, we can successfully log in to the admin dashboard of the Wordpress site:
 
-![Mr Robot - Wordpress Dashboard](/images/mrrobot_wordpress_dashboard.png)
+![Mr Robot - Wordpress Dashboard](tryhackme/images/mrrobot_wordpress_dashboard.png)
 
 Navigating through this dashboard, we find that we can edit the PHP code within the Theme Editor (**Appearance->Editor**). As such, we can change the code to a [PHP reverse shell](https://github.com/pentestmonkey/php-reverse-shell), ensuring to add our attacker IP and password to receive the callback:
 
-![Mr Robot - Callback Details](/images/mrrobot_callback_details.png)
+![Mr Robot - Callback Details](tryhackme/images/mrrobot_callback_details.png)
 
 In this instance, we can use the `404.php` as our upload point as this will load whenever we go to a page which does not exist (e.g., `thispagedoesnotexist.php`):
 
-![Mr Robot - 404 Template](/images/mrrobot_404_template.png)
+![Mr Robot - 404 Template](tryhackme/images/mrrobot_404_template.png)
 
 Configure the listener using the port specified in the PHP reverse shell:
 
@@ -163,7 +163,7 @@ $ nc -nvlp <PORT>
 
 Navigating to an invalid page results in a callback to our Netcat listener:
 
-![Mr Robot - Netcat Callback](/images/mrrobot_netcat_callback.png)
+![Mr Robot - Netcat Callback](tryhackme/images/mrrobot_netcat_callback.png)
 
 Stabilising our shell:
 
@@ -174,7 +174,7 @@ $ export TERM=xterm
 
 Looking through the filesystem, we find a `robot` user with two files listed in their `/home` directory, namely `key-2-of-3.txt` and `password.raw-md5`:
 
-![Mr Robot - Robot User](/images/mrrobot_robot_user.png)
+![Mr Robot - Robot User](tryhackme/images/mrrobot_robot_user.png)
 
 From the above permissions, we are unable to read `key-2-of-3.txt` but we can read `password.raw-md5` which shows it is the credentials for the `robot` user:
 
@@ -185,11 +185,11 @@ robot:c3fcd3d76192e4007dfb496cca67e13b
 
 We can therefore use a tool such as [CrackStation](https://crackstation.net) to retrieve the plaintext password:
 
-![Mr Robot - Crackstation](/images/mrrobot_crackstation.png)
+![Mr Robot - Crackstation](tryhackme/images/mrrobot_crackstation.png)
 
 With this we can switch user with the `su` command and read the second flag:
 
-![Mr Robot - Flag 2](/images/mrrobot_flag2.png)
+![Mr Robot - Flag 2](tryhackme/images/mrrobot_flag2.png)
 
 Now we need to escalate privileges to `root` in order to get full access to the machine. One avenue for this is to look for binaries with the SUID bit set which allows a user to gain temporary `root` privileges:
 
@@ -211,11 +211,11 @@ $ /usr/local/bin/nmap --interactive
 nmap> !sh
 ```
 
-![Mr Robot - Privesc](/images/mrrobot_privesc.png)
+![Mr Robot - Privesc](tryhackme/images/mrrobot_privesc.png)
 
 Finally, we can retrieve the final flag:
 
-![Mr Robot - Flag 3](/images/mrrobot_flag3.png)
+![Mr Robot - Flag 3](tryhackme/images/mrrobot_flag3.png)
 
 -----
 

@@ -61,7 +61,7 @@ Nmap done: 1 IP address (1 host up) scanned in 11.75 seconds
 
 Navigating to the website shows a basic terminal prompt design:
 
-![RootMe - Homepage](/images/rootme_homepage.png)
+![RootMe - Homepage](tryhackmetryhackme/images/rootme_homepage.png)
 
 Running GoBuster identifies an `/uploads` and a `/panel` directory:
 
@@ -69,27 +69,27 @@ Running GoBuster identifies an `/uploads` and a `/panel` directory:
 $ gobuster dir -u http://<VICTIM IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-![RootMe - Hidden Directory](/images/rootme_hidden_directory.png)
+![RootMe - Hidden Directory](tryhackmetryhackme/images/rootme_hidden_directory.png)
 
 Navigating to `/panel` shows an upload form:
 
-![RootMe - Upload Form](/images/rootme_upload_form.png)
+![RootMe - Upload Form](tryhackme/images/rootme_upload_form.png)
 
 Trying to upload a [PHP reverse shell](https://github.com/pentestmonkey/php-reverse-shell) errors out, as follows:
 
-![RootMe - PHP Invalid](/images/rootme_php_invalid.png)
+![RootMe - PHP Invalid](tryhackme/images/rootme_php_invalid.png)
 
 Changing the file extension from `.php` to `.php5` manages to succeed:
 
-![RootMe - PHP5 Valid](/images/rootme_php5_valid.png)
+![RootMe - PHP5 Valid](tryhackme/images/rootme_php5_valid.png)
 
 Navigating to `/uploads/php-reverse-shell.php5`, we receive a callback on our Netcat listener as the `www-data` user:
 
-![RootMe - Callback](/images/rootme_callback.png)
+![RootMe - Callback](tryhackme/images/rootme_callback.png)
 
 Manually crawling through the filesystem yields a `user.txt` in `/var/www`:
 
-![RootMe - User.txt](/images/rootme_user_txt.png)
+![RootMe - User.txt](tryhackme/images/rootme_user_txt.png)
 
 Looking for files with the SUID bit set finds `/usr/bin/python`:
 
@@ -97,11 +97,11 @@ Looking for files with the SUID bit set finds `/usr/bin/python`:
 $ find / -type f -perm -4000 2>/dev/null
 ```
 
-![RootMe - SUID Python](/images/rootme_setuid_python.png)
+![RootMe - SUID Python](tryhackme/images/rootme_setuid_python.png)
 
 Can run the [GTFOBin](https://gtfobins.github.io/gtfobins/python/#suid) for Python SUID to escalate privileges and get the `root.txt` flag:
 
-![RootMe - Privesc](/images/rootme_privesc.png)
+![RootMe - Privesc](tryhackme/images/rootme_privesc.png)
 
 -----
 

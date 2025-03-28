@@ -81,9 +81,9 @@ Nmap done: 1 IP address (1 host up) scanned in 20.88 seconds
 
 Navigating to the website, we are asked to authenticate and given a `HTTP 401 Unauthorized` error. As we don't have any usernames, we need must enumerate the host further. Running `enum4linux` provides more insight into the shares on the host and the usernames:
 
-![Year of the Fox - enum4linux shares](/images/yotf_enum4linux_shares.png)
+![Year of the Fox - enum4linux shares](tryhackme/images/yotf_enum4linux_shares.png)
 
-![Year of the Fox - enum4linux users](/images/yotf_enum4linux_users.png)
+![Year of the Fox - enum4linux users](tryhackme/images/yotf_enum4linux_users.png)
 
 With these two users we can bruteforce the authentication page with Hydra. Note, that each time the machine reboots, the password for the user changes
 
@@ -91,13 +91,13 @@ With these two users we can bruteforce the authentication page with Hydra. Note,
 $ hydra -L users.lst -P /usr/share/wordlists/rockyou.txt 10.10.195.56 http-head / 
 ```
 
-![Year of the Fox - rascal Credentials](/images/yotf_rascal_creds.png)
+![Year of the Fox - rascal Credentials](tryhackme/images/yotf_rascal_creds.png)
 
 Logging in with these credentials shows a search interface that lists the contents of directories:
 
-![Year of the Fox - Rascal's Search System](/images/yotf_rascal_search_system.png)
+![Year of the Fox - Rascal's Search System](tryhackme/images/yotf_rascal_search_system.png)
 
-![Year of the Fox - Directory Listing](/images/yotf_directory_listing.png)
+![Year of the Fox - Directory Listing](tryhackme/images/yotf_directory_listing.png)
 
 We can bypass the client-side filtering by using BurpSuite.
 
@@ -114,11 +114,11 @@ $ python3 -m http.server <PORT>
 
 Once we make the above request via BurpSuite, we obtain a callback on our Netcat listener:
 
-![Year of the Fox - Netcat Callback](/images/yotf_nc_callback.png)
+![Year of the Fox - Netcat Callback](tryhackme/images/yotf_nc_callback.png)
 
 Navigating through the filesystem, we can obtain the web flag:
 
-![Year of the Fox - Web Flag](/images/yotf_web_flag.png)
+![Year of the Fox - Web Flag](tryhackme/images/yotf_web_flag.png)
 
 -----
 
