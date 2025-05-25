@@ -24,8 +24,12 @@ Notepad.exe
 
 4. What is the process ID of the identified process?
 
+Found using API Monitor 2 on `Process32Next` parameters:
+
+![](Pasted%20image%2020250525152858.png)
+
 ```
-511
+16224
 ```
 
 5. What is the size of the shellcode?
@@ -43,5 +47,5 @@ CreateRemoteThread
 7. The injection method used by the attacker executes before the `main()` function is called. Which Win32 API is responsible for terminating the program before `main()` runs?
 
 ```
-
+ExitProcess
 ```
