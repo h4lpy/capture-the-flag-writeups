@@ -19,25 +19,29 @@ CreateToolhelp32Snapshot
 3. Which process is the attacker's binary attempting to locate for payload injection?
 
 ```
-
+Notepad.exe
 ```
 
 4. What is the process ID of the identified process?
 
 ```
-
+511
 ```
 
 5. What is the size of the shellcode?
 
 ```
-
+511
 ```
 
 6. Which Win32 API was used to execute the injected payload in the identified process?
 
 ```
-
+CreateRemoteThread
 ```
 
 7. The injection method used by the attacker executes before the `main()` function is called. Which Win32 API is responsible for terminating the program before `main()` runs?
+
+```
+
+```
