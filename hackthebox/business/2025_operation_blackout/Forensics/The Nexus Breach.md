@@ -43,13 +43,13 @@ com.phoenix.toolkit
 6. Which is the name of the function that manages the (AES) string decryption process? (e.g. aVf41)
 
 ```
-
+uJtXq5
 ```
 
 7. Which is the system command that triggered the reverse shell execution for this session running the tampered JAR? (e.g. "java .... &")
 
 ```
-
+java -jar /sonatype-work/storage/snapshots/com/phoenix/toolkit/1.0/PhoenixCyberToolkit-1.0.jar &
 ```
 
 8. Which other legit user has admin permissions on the Nexus instance (excluding "adm1n1str4t0r" and "admin")? (e.g. john_doe)
