@@ -7,7 +7,7 @@ Talion suspects that the threat actor carried out anti-virtualization checks to 
 1. Which WMI class did the attacker use to retrieve model and manufacturer information for virtualization detection?
 
 ```
-
+Win32_ComputerSystem
 ```
 
 2. Which WMI query did the attacker execute to retrieve the current temperature value of the machine?
